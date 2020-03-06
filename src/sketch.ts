@@ -1,5 +1,6 @@
 import { join } from 'path';
-import { Sketch } from './types/sketch'
+
+import { ISketch, SketchOption, PPath, PSketchBase, PSketches } from './types/sketch'
 
 export enum PVersions {
   p2 = 'p2',
@@ -8,18 +9,6 @@ export enum PVersions {
 
 export enum PSketchesEnum {
   pixelSort = 'pixelSort'
-}
-
-type PSketches = {
-  [sketch in PSketchesEnum]: Sketch 
-}
-
-type PPath = {
-  [version in PVersions]: string
-}
-
-type PSketchBase = {
-  [version in PVersions]: string
 }
 
 const PPath: PPath = {
@@ -42,29 +31,29 @@ const PSketches: PSketches = {
   }
 }
 
-export const getVersion = (sketch: keyof typeof PSketchesEnum): keyof typeof PVersions => PSketches[sketch].version
+export const getVersion = (sketch: SketchOption): keyof typeof PVersions => PSketches[sketch].version
 
-export const getSketch = (sketch: keyof typeof PSketchesEnum): Sketch => ({...PSketches[sketch]})
+export const getSketch = (sketch: SketchOption): ISketch => ({...PSketches[sketch]})
 
-export const getProcessingCmd = (sketch: keyof typeof PSketchesEnum) => {
+export const getProcessingCmd = (sketch: SketchOption) => {
   const version = getVersion(sketch);
 
   return `${PPath[version]} --sketch=${join(PSketchBase[version], PSketches[sketch].name)} --run`
 }
 
-export const getAssetsPath = (sketch: keyof typeof PSketchesEnum) => {
+export const getAssetsPath = (sketch: SketchOption) => {
   const version = getVersion(sketch);
 
   return join(PSketchBase[version], PSketches[sketch].assets);
 }
 
-export const getDataPath = (sketch: keyof typeof PSketchesEnum) => {
+export const getDataPath = (sketch: SketchOption) => {
   const version = getVersion(sketch);
 
   return join(PSketchBase[version], PSketches[sketch].data);
 }
 
-export const getSetupFilePath = (sketch: keyof typeof PSketchesEnum) => {
+export const getSetupFilePath = (sketch: SketchOption) => {
   const version = getVersion(sketch);
 
   return join(PSketchBase[version], PSketches[sketch].setup)

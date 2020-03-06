@@ -7,8 +7,9 @@ import { pipeline } from 'stream';
 import * as sketches from './sketch';
 import { promisify } from 'util';
 
+import { SketchOption } from './types/sketch';
 import { Tweet, Media } from './types/tweet';
-import { File } from './types/utils';
+import { IFile } from './types/utils';
 
 const pipelineAsync = promisify(pipeline);
 
@@ -17,7 +18,7 @@ const getParentTweetId = (tweet: Tweet) => tweet.in_reply_to_status_id_str
 const hasValidImage = (tweet: Tweet) => 
   Boolean(tweet.entities.media && tweet.entities.media.filter(media => media.type === 'photo').length)
 
-const getFilePath = (sketch: keyof typeof sketches.PSketchesEnum, fileName: string) => join(sketches.getAssetsPath(sketch), fileName)
+const getFilePath = (sketch: SketchOption, fileName: string) => join(sketches.getAssetsPath(sketch), fileName)
 
 const getImageUrl = (tweet: Tweet, withSize: boolean) => 
   withSize ?
@@ -28,14 +29,14 @@ const getFileFormat = (tweet: Tweet) => getImageUrl(tweet, false).match(/\.[0-9a
 
 const getTweetUrl = (tweet: Tweet) => `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
 
-async function downloadImage(uri: string, sketch: keyof typeof sketches.PSketchesEnum, file: File) {
+async function downloadImage(uri: string, sketch: SketchOption, file: IFile) {
   return await pipelineAsync(
     got.stream(uri),
     createWriteStream(getFilePath(sketch, `${file.name}${file.format}`))
   )
 }
 
-function saveInfo(setupPath: string, file: File) {
+function saveInfo(setupPath: string, file: IFile) {
   try {
     writeFileSync(setupPath, `${file.name},${file.format}`)
   } catch (error) {

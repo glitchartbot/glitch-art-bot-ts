@@ -1,6 +1,6 @@
-import { PVersions } from '../sketch';
+import { PVersions, PSketchesEnum } from '../sketch';
 
-export interface Sketch {
+export interface ISketch {
   version: PVersions,
   name: string,
   data: string,
@@ -8,5 +8,16 @@ export interface Sketch {
   assets: string
 }
 
+export type SketchOption = keyof typeof PSketchesEnum
 
+export type PSketches = {
+  [sketch in PSketchesEnum]: ISketch 
+}
 
+export type PPath = {
+  [version in PVersions]: string
+}
+
+export type PSketchBase = {
+  [version in PVersions]: string
+}
