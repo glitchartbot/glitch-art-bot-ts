@@ -1,0 +1,30 @@
+{
+  "name": "glitch-art-bot-ts",
+  "version": "1.0.0",
+  "description": "Typed implementation of GlitchArtBot",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "got": "^10.6.0",
+    "twitter-lite": "^0.9.4"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.7",
+    "typescript": "^3.8.3"
+  },
+  "scripts": {
+    "start": "tsc && node build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/friaca/glitch-art-bot-ts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/friaca/glitch-art-bot-ts/issues"
+  },
+  "homepage": "https://github.com/friaca/glitch-art-bot-ts#readme"
+}
