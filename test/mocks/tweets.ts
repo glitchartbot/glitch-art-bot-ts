@@ -353,7 +353,7 @@ const mediaExtended: Tweet = {
   "lang": "pt"
 }
 
-const noMediaExtended = {
+const noMediaExtended: Tweet = {
   "created_at": "Wed Feb 26 01:23:57 +0000 2020",
   "id": 1232476361320587265,
   "id_str": "1232476361320587265",
@@ -435,7 +435,7 @@ const noMediaExtended = {
   "lang": "en"
 }
 
-const noMediaNotExtended = {
+const noMediaNotExtended: Tweet = {
   "created_at": "Wed Feb 26 01:26:12 +0000 2020",
   "id": 1232476926926708737,
   "id_str": "1232476926926708737",
@@ -523,4 +523,390 @@ const noMediaNotExtended = {
   "lang": "en"
 }
 
-export { mediaNotExtended, mediaExtended, noMediaExtended, noMediaNotExtended }
+const sonTweet: Tweet = {
+  "created_at": "Thu Mar 05 01:30:44 +0000 2020",
+  "id": 1235377172883402753,
+  "id_str": "1235377172883402753",
+  "text": "@tthisolddog relaxa man é só tirar a dilma que o dolar chega em 2 dinheiros",
+  "truncated": false,
+  "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [
+          {
+              "screen_name": "tthisolddog",
+              "name": "pedro pedro pedro pedro pedro pedro pedro pedro pe",
+              "id": 547740103,
+              "id_str": "547740103",
+              "indices": [
+                  0,
+                  12
+              ]
+          }
+      ],
+      "urls": []
+  },
+  "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+  "in_reply_to_status_id": 1235375942924632064,
+  "in_reply_to_status_id_str": "1235375942924632064",
+  "in_reply_to_user_id": 547740103,
+  "in_reply_to_user_id_str": "547740103",
+  "in_reply_to_screen_name": "tthisolddog",
+  "user": {
+      "id": 3306202054,
+      "id_str": "3306202054",
+      "name": "🌫️",
+      "screen_name": "phriaca",
+      "location": "",
+      "description": "",
+      "url": null,
+      "entities": {
+          "description": {
+              "urls": []
+          }
+      },
+      "protected": false,
+      "followers_count": 139,
+      "friends_count": 142,
+      "listed_count": 1,
+      "created_at": "Tue Jun 02 00:09:02 +0000 2015",
+      "favourites_count": 9483,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 5919,
+      "lang": null,
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "ACDED6",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme18/bg.gif",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme18/bg.gif",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/1177315024940994562/jC46v6-J_normal.jpg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1177315024940994562/jC46v6-J_normal.jpg",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/3306202054/1581211944",
+      "profile_link_color": "00163A",
+      "profile_sidebar_border_color": "000000",
+      "profile_sidebar_fill_color": "000000",
+      "profile_text_color": "000000",
+      "profile_use_background_image": true,
+      "has_extended_profile": false,
+      "default_profile": false,
+      "default_profile_image": false,
+      "following": true,
+      "follow_request_sent": false,
+      "notifications": false,
+      "translator_type": "none"
+  },
+  "geo": null,
+  "coordinates": null,
+  "place": null,
+  "contributors": null,
+  "is_quote_status": false,
+  "retweet_count": 0,
+  "favorite_count": 2,
+  "favorited": false,
+  "retweeted": false,
+  "lang": "pt"
+}
+
+const orphanTweet: Tweet = {
+  "created_at": "Thu Mar 05 01:25:51 +0000 2020",
+  "id": 1235375942924632064,
+  "id_str": "1235375942924632064",
+  "text": "so hoje o dólar subiu 7 centavo KKKKKKKKKKKKKKKKKKKKKKK",
+  "truncated": false,
+  "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+  },
+  "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+  "in_reply_to_status_id": null,
+  "in_reply_to_status_id_str": null,
+  "in_reply_to_user_id": null,
+  "in_reply_to_user_id_str": null,
+  "in_reply_to_screen_name": null,
+  "user": {
+      "id": 547740103,
+      "id_str": "547740103",
+      "name": "...and the gods made love",
+      "screen_name": "tthisolddog",
+      "location": "fundo do poço",
+      "description": "now there's a look in your eyes\nlike black holes in the sky",
+      "url": null,
+      "entities": {
+          "description": {
+              "urls": []
+          }
+      },
+      "protected": false,
+      "followers_count": 777,
+      "friends_count": 1213,
+      "listed_count": 6,
+      "created_at": "Sat Apr 07 16:39:55 +0000 2012",
+      "favourites_count": 13752,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": true,
+      "verified": false,
+      "statuses_count": 16855,
+      "lang": null,
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "131516",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme14/bg.gif",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme14/bg.gif",
+      "profile_background_tile": true,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/1228348576058703872/SpqGee2l_normal.jpg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1228348576058703872/SpqGee2l_normal.jpg",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/547740103/1577630751",
+      "profile_link_color": "000000",
+      "profile_sidebar_border_color": "000000",
+      "profile_sidebar_fill_color": "EFEFEF",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "has_extended_profile": false,
+      "default_profile": false,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false,
+      "translator_type": "none"
+  },
+  "geo": null,
+  "coordinates": null,
+  "place": null,
+  "contributors": null,
+  "is_quote_status": false,
+  "retweet_count": 0,
+  "favorite_count": 5,
+  "favorited": false,
+  "retweeted": false,
+  "lang": "pt"
+}
+
+const multipleMediaExtended: Tweet = {
+  "created_at": "Fri Mar 06 20:09:32 +0000 2020",
+  "id": 1236021113504792576,
+  "id_str": "1236021113504792576",
+  "full_text": "alo. to vendendo uma webcam logitech c920 pro HD 1080p pq eu ia fazer stream com webcam mas não pretendo mais fazer por agora pq não me sinto bem fazendo stream com webcam então vou vender pq preciso de dinheiro pra tocar uns projetos. menos de 1 mes  de uso frete gratis chama DM https://t.co/oL1bOGtTvN",
+  "truncated": false,
+  "display_text_range": [
+      0,
+      280
+  ],
+  "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": [],
+      "media": [
+          {
+              "id": 1236021101802729473,
+              "id_str": "1236021101802729473",
+              "indices": [
+                  281,
+                  304
+              ],
+              "media_url": "http://pbs.twimg.com/media/ESc6pLPWsAEC8Ln.jpg",
+              "media_url_https": "https://pbs.twimg.com/media/ESc6pLPWsAEC8Ln.jpg",
+              "url": "https://t.co/oL1bOGtTvN",
+              "display_url": "pic.twitter.com/oL1bOGtTvN",
+              "expanded_url": "https://twitter.com/kuramaboy_/status/1236021113504792576/photo/1",
+              "type": "photo",
+              "sizes": {
+                  "small": {
+                      "w": 359,
+                      "h": 680,
+                      "resize": "fit"
+                  },
+                  "thumb": {
+                      "w": 150,
+                      "h": 150,
+                      "resize": "crop"
+                  },
+                  "medium": {
+                      "w": 634,
+                      "h": 1200,
+                      "resize": "fit"
+                  },
+                  "large": {
+                      "w": 720,
+                      "h": 1362,
+                      "resize": "fit"
+                  }
+              }
+          }
+      ]
+  },
+  "extended_entities": {
+      "media": [
+          {
+              "id": 1236021101802729473,
+              "id_str": "1236021101802729473",
+              "indices": [
+                  281,
+                  304
+              ],
+              "media_url": "http://pbs.twimg.com/media/ESc6pLPWsAEC8Ln.jpg",
+              "media_url_https": "https://pbs.twimg.com/media/ESc6pLPWsAEC8Ln.jpg",
+              "url": "https://t.co/oL1bOGtTvN",
+              "display_url": "pic.twitter.com/oL1bOGtTvN",
+              "expanded_url": "https://twitter.com/kuramaboy_/status/1236021113504792576/photo/1",
+              "type": "photo",
+              "sizes": {
+                  "small": {
+                      "w": 359,
+                      "h": 680,
+                      "resize": "fit"
+                  },
+                  "thumb": {
+                      "w": 150,
+                      "h": 150,
+                      "resize": "crop"
+                  },
+                  "medium": {
+                      "w": 634,
+                      "h": 1200,
+                      "resize": "fit"
+                  },
+                  "large": {
+                      "w": 720,
+                      "h": 1362,
+                      "resize": "fit"
+                  }
+              }
+          },
+          {
+              "id": 1236021108874326017,
+              "id_str": "1236021108874326017",
+              "indices": [
+                  281,
+                  304
+              ],
+              "media_url": "http://pbs.twimg.com/media/ESc6pllWsAEirIo.jpg",
+              "media_url_https": "https://pbs.twimg.com/media/ESc6pllWsAEirIo.jpg",
+              "url": "https://t.co/oL1bOGtTvN",
+              "display_url": "pic.twitter.com/oL1bOGtTvN",
+              "expanded_url": "https://twitter.com/kuramaboy_/status/1236021113504792576/photo/1",
+              "type": "photo",
+              "sizes": {
+                  "thumb": {
+                      "w": 150,
+                      "h": 150,
+                      "resize": "crop"
+                  },
+                  "small": {
+                      "w": 548,
+                      "h": 680,
+                      "resize": "fit"
+                  },
+                  "medium": {
+                      "w": 720,
+                      "h": 894,
+                      "resize": "fit"
+                  },
+                  "large": {
+                      "w": 720,
+                      "h": 894,
+                      "resize": "fit"
+                  }
+              }
+          }
+      ]
+  },
+  "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+  "in_reply_to_status_id": null,
+  "in_reply_to_status_id_str": null,
+  "in_reply_to_user_id": null,
+  "in_reply_to_user_id_str": null,
+  "in_reply_to_screen_name": null,
+  "user": {
+      "id": 3207445696,
+      "id_str": "3207445696",
+      "name": "lucas 🔪",
+      "screen_name": "kuramaboy_",
+      "location": "mg. | @elementalita 🤧💖",
+      "description": "juro que to tentando melhorar ta / Founder/CEO @hypestudioss",
+      "url": "https://t.co/qgQZCbhkzc",
+      "entities": {
+          "url": {
+              "urls": [
+                  {
+                      "url": "https://t.co/qgQZCbhkzc",
+                      "expanded_url": "http://twitch.tv/kuramaboyyy",
+                      "display_url": "twitch.tv/kuramaboyyy",
+                      "indices": [
+                          0,
+                          23
+                      ]
+                  }
+              ]
+          },
+          "description": {
+              "urls": []
+          }
+      },
+      "protected": false,
+      "followers_count": 35974,
+      "friends_count": 727,
+      "listed_count": 15,
+      "created_at": "Sat Apr 25 19:36:28 +0000 2015",
+      "favourites_count": 13201,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": true,
+      "verified": false,
+      "statuses_count": 56160,
+      "lang": null,
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "000000",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/1228512400267194368/Is2IW1Hw_normal.jpg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1228512400267194368/Is2IW1Hw_normal.jpg",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/3207445696/1568653414",
+      "profile_link_color": "ABB8C2",
+      "profile_sidebar_border_color": "000000",
+      "profile_sidebar_fill_color": "000000",
+      "profile_text_color": "000000",
+      "profile_use_background_image": false,
+      "has_extended_profile": true,
+      "default_profile": false,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false,
+      "translator_type": "none"
+  },
+  "geo": null,
+  "coordinates": null,
+  "place": null,
+  "contributors": null,
+  "is_quote_status": false,
+  "retweet_count": 12,
+  "favorite_count": 114,
+  "favorited": false,
+  "retweeted": false,
+  "possibly_sensitive": false,
+  "possibly_sensitive_appealable": false,
+  "lang": "pt"
+}
+
+export { 
+  mediaNotExtended, 
+  mediaExtended, 
+  noMediaExtended, 
+  noMediaNotExtended, 
+  sonTweet, 
+  orphanTweet, 
+  multipleMediaExtended 
+}
