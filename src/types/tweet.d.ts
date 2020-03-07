@@ -13,15 +13,20 @@ export interface Geo {
   geo: GeoCoordinates
 }
 
+export interface UserEntities {
+  description?: { urls?: string[] | undefined }
+}
+
 export interface User {
   id: number, 
   id_str: string,
   name: string,
   screen_name: string,
   location?: string,
-  derived: Geo[],
+  derived?: Geo[],
   url?: string,
   description?: string,
+  entities?: UserEntities,
   protected: boolean,
   verified: boolean,
   followers_count: number,
@@ -30,12 +35,36 @@ export interface User {
   favourites_count: number,
   statuses_count: number,
   created_at: string,
-  profile_banner_url: string,
-  profile_image_url_https: string,
+  profile_banner_url?: string,
+  profile_image_url_https?: string,
   default_profile: boolean,
   default_profile_image: boolean,
   withheld_in_countries?: string[],
-  withheld_scope?: string
+  withheld_scope?: string,
+  // Propriedades deprecadas, 
+  // inserindo pra ser complicente com o tweet 
+  utc_offset: string | number | null,
+  time_zone:  string | number | null,
+  geo_enabled: unknown,
+  lang: string,
+  contributors_enabled: boolean,
+  is_translator: boolean,
+  is_translation_enabled: boolean,
+  profile_background_color: string | null
+  profile_background_image_url: string | null
+  profile_background_image_url_https: string | null
+  profile_background_tile: boolean
+  profile_image_url: string
+  profile_link_color: string
+  profile_sidebar_border_color: string,
+  profile_sidebar_fill_color: string,
+  profile_text_color: string
+  profile_use_background_image: boolean,
+  has_extended_profile: boolean,
+  following: boolean
+  follow_request_sent: boolean
+  notifications: boolean
+  translator_type: string | null
 }
 
 export interface Place {
@@ -77,8 +106,8 @@ export interface Media {
   media_url: string,
   media_url_https: string,
   sizes: Sizes,
-  source_status_id: number,
-  source_status_id_str: string,
+  source_status_id?: number,
+  source_status_id_str?: string,
   type: "photo" | "video" | "animated_gif",
   url: string
 }
@@ -128,13 +157,17 @@ export interface Entities {
   urls: Url[],
   user_mentions: UserMention[],
   symbols: TSymbol[],
-  polls: Poll[]
+  polls?: Poll[]
 }
 
 export interface MatchingRule {
   tag: string,
   id: number,
   id_str: string
+}
+
+export interface ExtendedEntities {
+  media: Media[]
 }
 
 export interface Tweet {
@@ -162,7 +195,7 @@ export interface Tweet {
   retweet_count: number,
   favorite_count?: number,
   entities: Entities,
-  extended_entities: Media[],
+  extended_entities: ExtendedEntities,
   favorited: boolean,
   retweeted: boolean,
   possibly_sensitive: boolean,
