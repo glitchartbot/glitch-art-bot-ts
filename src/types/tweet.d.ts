@@ -14,7 +14,8 @@ export interface Geo {
 }
 
 export interface UserEntities {
-  description?: { urls?: string[] | undefined }
+  description?: { urls?: string[] | undefined | Url[] }
+  url?: { urls: Url[] }
 }
 
 export interface User {
@@ -42,7 +43,7 @@ export interface User {
   withheld_in_countries?: string[],
   withheld_scope?: string,
   // Propriedades deprecadas, 
-  // inserindo pra ser complicente com o tweet 
+  // inserindo pra ser complacente com o tweet 
   utc_offset: string | number | null,
   time_zone:  string | number | null,
   geo_enabled: unknown,
@@ -124,7 +125,7 @@ export interface Url {
   expanded_url: string,
   indices: number[],
   url: string,
-  unwound: Unwound
+  unwound?: Unwound
 }
 
 export interface UserMention {
@@ -153,7 +154,7 @@ export interface Poll {
 
 export interface Entities {
   hashtags: Hashtag[],
-  media: Media[],
+  media?: Media[],
   urls: Url[],
   user_mentions: UserMention[],
   symbols: TSymbol[],
@@ -174,19 +175,21 @@ export interface Tweet {
   created_at: string,
   id: number, 
   id_str: string,
-  text: string,
+  text?: string,
+  full_text?: string,
   source: string,
   truncated: boolean,
-  in_reply_to_status_id?: number,
-  in_reply_to_status_id_str?: string,
-  in_reply_to_user_id?: number,
-  in_reply_to_user_id_str?: string,
-  in_reply_to_screen_name?: string,
+  display_text_range?: number[],
+  in_reply_to_status_id: number | null,
+  in_reply_to_status_id_str: string | null,
+  in_reply_to_user_id: number | null,
+  in_reply_to_user_id_str: string | null,
+  in_reply_to_screen_name: string,
   user: User,
   coordinates?: GeoCoordinates,
   place?: Place,
-  quoted_status_id: number,
-  quoted_status_id_str: string,
+  quoted_status_id?: number,
+  quoted_status_id_str?: string,
   is_quote_status: boolean,
   quoted_status?: Tweet,
   retweeted_status?: Tweet,
@@ -195,11 +198,16 @@ export interface Tweet {
   retweet_count: number,
   favorite_count?: number,
   entities: Entities,
-  extended_entities: ExtendedEntities,
+  extended_entities?: ExtendedEntities,
   favorited: boolean,
   retweeted: boolean,
-  possibly_sensitive: boolean,
-  filter_level: "none" | "low" | "medium" | "high",
+  possibly_sensitive?: boolean,
+  filter_level?: "none" | "low" | "medium" | "high",
   lang: string,
-  matching_rules: MatchingRule[]
+  matching_rules?: MatchingRule[],
+  possibly_sensitive_appealable?: boolean,
+  // Propriedades deprecadas, 
+  // inserindo pra ser complacente com o tweet
+  geo: null,
+  contributors: null
 }
