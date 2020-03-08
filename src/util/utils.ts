@@ -4,12 +4,12 @@ const got = require('got');
 import { createWriteStream, writeFileSync } from 'fs';
 import { join } from 'path';
 import { pipeline } from 'stream';
-import * as sketches from './sketch';
+import * as sketches from '../sketch';
 import { promisify } from 'util';
 
-import { SketchOption } from './types/sketch';
-import { Tweet, Media } from './types/tweet';
-import { IFile } from './types/utils';
+import { SketchOption } from '../types/sketch';
+import { Tweet, Media } from '../types/tweet';
+import { IFile } from '../types/utils';
 
 const pipelineAsync = promisify(pipeline);
 

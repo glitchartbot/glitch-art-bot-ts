@@ -65,7 +65,8 @@
     "noEmitOnError": true /* Do not emit outputs if any errors were reported. */
   },
   "include": [
-    "src/*.ts",
+    "src/*.ts", 
+    "src/util/*.ts",
   ],
   "exclude": [
     "**/node_modules/**",
