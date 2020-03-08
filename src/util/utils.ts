@@ -6,10 +6,11 @@ import { join } from 'path';
 import { pipeline } from 'stream';
 import * as sketches from '../sketch';
 import { promisify } from 'util';
+import logger from './logger';
 
 import { SketchOption } from '../types/sketch';
 import { Tweet, Media } from '../types/tweet';
-import { IFile } from '../types/utils';
+import { IFile, ILog } from '../types/utils';
 
 const pipelineAsync = promisify(pipeline);
 
@@ -40,7 +41,7 @@ async function downloadImage(uri: string, sketch: SketchOption, file: IFile) {
   }
 }
 
-function saveInfo(setupPath: string, file: IFile) {
+function saveSetupInfo(setupPath: string, file: IFile): void {
   try {
     writeFileSync(setupPath, `${file.name},${file.format}`)
   } catch (error) {
@@ -48,10 +49,19 @@ function saveInfo(setupPath: string, file: IFile) {
   }
 }
 
-function log(content: any) {
-  //TODO: Fazer uma função de log decente, isso aqui era pra ser temporário
-  const json = JSON.stringify(content, null, 2);
-  writeFileSync('log.json', json);
+function log(logEntry: ILog): void;
+function log(logEntry: ILog, error: Error, tweet: Tweet): void
+
+function log(logEntry: ILog, error?: Error, tweet?: Tweet): void {
+  logger.log(logEntry)
+
+  if (error || tweet) { 
+    const detailed = { error, tweet }
+    const json = JSON.stringify(detailed, null, 2)
+    const logId = tweet ? tweet.id_str : 'nt_' + Date.now()
+
+    writeFileSync(`logs/${logId}.json`, json)
+  }
 }
 
 export {
@@ -61,7 +71,7 @@ export {
   getImageUrl,
   getFilePath,
   getFileFormat,
-  saveInfo,
+  saveSetupInfo,
   log,
   getTweetUrl
 }
