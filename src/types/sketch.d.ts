@@ -15,9 +15,9 @@ export type PSketches = {
 }
 
 export type PPath = {
-  [version in PVersions]: any
+  [version in PVersions]: string | undefined
 }
 
 export type PSketchBase = {
-  [version in PVersions]: any
+  [version in PVersions]: string | undefined
 }
