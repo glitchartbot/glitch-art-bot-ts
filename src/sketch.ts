@@ -38,23 +38,23 @@ export const getSketch = (sketch: SketchOption): ISketch => ({...sketches[sketch
 export const getProcessingCmd = (sketch: SketchOption) => {
   const version = getVersion(sketch);
 
-  return `${path[version]} --sketch=${join(sketchBase[version], sketches[sketch].name)} --run`
+  return `${path[version]} --sketch=${join(sketchBase[version] as string, sketches[sketch].name)} --run`
 }
 
 export const getAssetsPath = (sketch: SketchOption) => {
   const version = getVersion(sketch);
 
-  return join(sketchBase[version], sketches[sketch].assets);
+  return join(sketchBase[version] as string, sketches[sketch].assets);
 }
 
 export const getDataPath = (sketch: SketchOption) => {
   const version = getVersion(sketch);
 
-  return join(sketchBase[version], sketches[sketch].data);
+  return join(sketchBase[version] as string, sketches[sketch].data);
 }
 
 export const getSetupFilePath = (sketch: SketchOption) => {
   const version = getVersion(sketch);
 
-  return join(sketchBase[version], sketches[sketch].setup)
+  return join(sketchBase[version] as string, sketches[sketch].setup)
 }
