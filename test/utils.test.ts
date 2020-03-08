@@ -6,7 +6,7 @@ import {
   getTweetUrl,
   getImageUrl,
   downloadImage,
-  saveInfo
+  saveSetupInfo
 } from '../src/util/utils';
 
 import {
@@ -84,7 +84,7 @@ test('salva as informações da imagem no arquivo de setup', () => {
   }
   const expected = 'imagem,.png'
 
-  saveInfo(getSetupFilePath('pixelSort'), infoImagem);
+  saveSetupInfo(getSetupFilePath('pixelSort'), infoImagem);
 
   const content = readFileSync(getSetupFilePath('pixelSort')).toString();
   expect(content).toBe(expected);
