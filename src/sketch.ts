@@ -12,13 +12,13 @@ export enum PSketchesEnum {
 }
 
 const path: PPath = {
-  p2: 'C:\\Processing\\processing-2.2.1\\processing-java.exe',
-  p3: 'C:\\Processing\\processing-3.5.4\\processing-java.exe'
+  p2: process.env.P2_PATH,
+  p3: process.env.P3_PATH
 }
 
 const sketchBase: PSketchBase = {
-  p2: 'C:\\Processing\\sketches-p2',
-  p3: 'C:\\Processing\\sketches-p3'
+  p2: process.env.P2_SKETCH_BASE,
+  p3: process.env.P3_SKETCH_BASE
 }
 
 const sketches: PSketches = {
