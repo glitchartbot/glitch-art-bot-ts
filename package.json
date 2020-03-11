@@ -6,7 +6,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "got": "^10.6.0",
-    "twitter-lite": "^0.9.4",
+    "twit": "^2.2.11",
     "winston": "^3.2.1",
     "yargs-parser": "^18.1.0"
   },
