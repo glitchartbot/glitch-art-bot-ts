@@ -73,6 +73,6 @@
     "build/**/*",
   ],
   "files": [
-    "src/types/twitter-lite.d.ts",
+    "src/types/twit.d.ts",
   ]
 }
