@@ -50,6 +50,7 @@ export function saveSetupInfo(setupPath: string, file: IFile): void {
 }
 
 export function log(logEntry: ILog): void;
+export function log(logEntry: ILog, error: Error): void
 export function log(logEntry: ILog, error: Error, tweet: Tweet): void
 
 export function log(logEntry: ILog, error?: Error, tweet?: Tweet): void {
