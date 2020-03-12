@@ -9,7 +9,7 @@ import { promisify } from 'util';
 import logger from './logger';
 
 import { SketchOption } from '../types/sketch';
-import { Tweet, Media } from '../types/tweet';
+import { Tweet, Media } from '../types/twitter/tweet';
 import { IFile, ILog } from '../types/utils';
 
 const pipelineAsync = promisify(pipeline);
