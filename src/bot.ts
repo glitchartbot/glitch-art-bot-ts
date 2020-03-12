@@ -1,6 +1,72 @@
-import { readFileSync } from 'fs';
-import * as TwitterLite from 'twitter-lite';
-import * as utils from './util/utils';
-import { keys } from './config';
+const twit = require('twit')
 
-const client = new TwitterLite(keys);
+import { readFileSync } from 'fs';
+import { keys } from './config';
+import * as utils from './util/utils';
+
+import { Get } from './types/twit';
+import { Tweet } from './types/twitter/tweet';
+import { UploadedMedia } from './types/twitter/media';
+import { SketchOption } from './types/sketch';
+import { ExtendedError, IFile } from './types/utils';
+
+const twitter = new twit(keys);
+const ID = '1232403291151196160';
+
+function uploadTweet(params: any): Promise<Tweet> { 
+  return twitter.post('statuses/update', params)
+    .then((res: Get<Tweet>) => res.data)
+    .catch((error: Error) => { throw error; })
+}
+
+function uploadImage(sketch: SketchOption, file: IFile): Promise<UploadedMedia> {
+  const filePath = utils.getFilePath(sketch, file);
+  const b64 = readFileSync(filePath, { encoding: 'base64' });
+
+  return twitter.post('media/upload', { media_data: b64 })
+    .then((res: Get<UploadedMedia>) => res.data)
+    .catch((error: ExtendedError) => { throw error; })
+}
+
+export function getTweetById(tweetId: string): Promise<Tweet> {
+  const params = { id: tweetId, tweet_mode: 'extended' }
+
+  return twitter.get('statuses/show', params)
+    .then((res: Get<Tweet>) => res.data)
+    .catch((error: ExtendedError) => { 
+      error.id = tweetId; 
+      throw error; 
+    })
+}
+
+export function listenQuery(query: string | string[], callback: Function) {
+  const stream = twitter.stream('statuses/filter', { track: query })
+  stream.on('tweet', callback)
+}
+
+export function replyTweet(tweetId: string): Promise<Tweet>
+
+export async function replyTweet(tweetId: string, status?: string, sketch?: SketchOption, file?: IFile): Promise<Tweet> {
+  try {
+    const tweet = await getTweetById(tweetId);
+    const screenName = tweet.user.screen_name;
+    let uploaded: UploadedMedia;
+    let params: any = {
+      in_reply_to_status_id: tweet.id_str, 
+      status: `@${screenName}` 
+    };
+  
+    if (file && sketch) {
+      uploaded = await uploadImage(sketch, file);
+      params.media_ids = [uploaded.media_id_string];
+    }
+    
+    if (status) {
+      params.status += ` ${status}`;
+    }
+  
+    return await uploadTweet(params);
+  } catch (error) {
+    throw error;
+  }
+} 
