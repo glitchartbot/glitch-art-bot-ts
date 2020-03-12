@@ -1,4 +1,4 @@
-export interface Media {
+export interface UploadedMedia {
   media_id: number,
   media_id_string: string,
   media_key: string,
