@@ -1,7 +1,6 @@
-import { PVersions, PSketchesEnum } from '../sketch';
+import { PSketchesEnum } from '../../src/sketch/index';
 
 export interface ISketch {
-  version: PVersions,
   name: string,
   data: string,
   setup: string,
@@ -14,10 +13,7 @@ export type PSketches = {
   [sketch in PSketchesEnum]: ISketch 
 }
 
-export type PPath = {
-  [version in PVersions]: string | undefined
-}
-
-export type PSketchBase = {
-  [version in PVersions]: string | undefined
+export type SketchConfig = {
+  name: PSketchesEnum,
+  parameters: string[]
 }
