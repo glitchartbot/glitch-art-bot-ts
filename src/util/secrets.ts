@@ -7,7 +7,7 @@ if (existsSync('.env') && !existsSync('.env.test')) {
   dotenv.config({ path: '.env' });
 } else if (existsSync('.env.test')) {
   logger.debug('Using development environment variables');
-  dotenv.config({ path: '.env.test' });  // you can delete this after you create your own .env file!
+  dotenv.config({ path: '.env.test' });
 } else {
   logger.error('No .env file found');
   process.exit(1);
