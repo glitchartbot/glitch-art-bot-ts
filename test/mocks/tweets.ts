@@ -1,4 +1,4 @@
-import { Tweet } from '../../src/types/tweet'
+import { Tweet } from '../../src/types/twitter/tweet'
 
 const mediaNotExtended: Tweet = {
   "created_at": "Thu Feb 27 03:42:43 +0000 2020",
