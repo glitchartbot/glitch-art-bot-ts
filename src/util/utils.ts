@@ -30,6 +30,13 @@ export const getFileFormat = (tweet: Tweet) => getImageUrl(tweet, false).match(/
 
 export const getTweetUrl = (tweet: Tweet) => `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
 
+export function isValidConfig(text: string): boolean {
+  const validFormat = Boolean(text.trim().match(/^\w+ ((\w+=\d+) |(\w+=\d+)){0,}$/gm));
+  const validSketch = sketches.getAvailableSketches().includes(text.split(' ')[0] || '');
+
+  return validFormat && validSketch;
+} 
+
 export async function downloadImage(uri: string, sketch: SketchOption, file: IFile) {
   try {
     return await pipelineAsync(
@@ -39,6 +46,28 @@ export async function downloadImage(uri: string, sketch: SketchOption, file: IFi
   } catch (error) {
     throw error;
   }
+}
+
+export function sanitizeText(text: string) {
+  const removeHyphens = (str: string) => str.replace(/-/g, '')
+  
+  try {
+    let sanitized = text.trim()
+      .replace(/\r?\n|\r/g, ' ')
+      .split(' ')
+      .filter(el => el)
+      .filter(el => el[0] !== '@')
+      .map(removeHyphens)
+      .filter(el => el)
+  
+    let [script, ...options] = sanitized;
+    script = removeHyphens(script);
+  
+    return [script, options.join(' ')];
+  } catch (error) {
+    throw error;
+  }
+
 }
 
 export function saveSetupInfo(setupPath: string, file: IFile): void {
