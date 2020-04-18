@@ -14,7 +14,7 @@ import { ExtendedError, IFile } from './types/utils';
 const twitter = new twit(keys);
 export const ID = '1232403291151196160';
 
-function uploadTweet(params: any): Promise<Tweet> { 
+function uploadTweet(params: Params): Promise<Tweet> { 
   return twitter.post('statuses/update', params)
     .then((res: Get<Tweet>) => res.data)
     .catch((error: Error) => { throw error; })
