@@ -16,11 +16,15 @@ test('retorna o sketch', () => {
 })
 
 test('retorna o comando certo pra executar o script', () => {
-  const regex = /^.+-(\d.\d.\d).+\.exe --sketch=.+(\\|\/)(\w+) --run$/gm;
-  const cmd = getProcessingCmd('pixelsort');
-  const matches = cmd.match(regex);
+  const regexPurePath = /^.+-(\d.\d.\d).+\.exe --sketch=.+(\\|\/)(\w+) --run$/gm;
+  const regexPathWithArgs = /^.+-(\d.\d.\d).+\.exe --sketch=.+(\\|\/)(\w+) --run( \w+=\d| \w+=\d ){0,}$/gm;
+  const cmdPure = getProcessingCmd('pixelsort');
+  const cmdWithArgs = getProcessingCmd('pixelsort', {mode: 1, photo: 2})
+  const matches = [cmdPure.match(regexPurePath), cmdWithArgs.match(regexPathWithArgs)];
 
-  expect(matches).toBeTruthy();
+  const allMatches = matches.filter(el => el).length === matches.length;
+
+  expect(allMatches).toBe(true);
 })
 
 test('retorna o caminho da pasta de recursos (fontes)', () => {
