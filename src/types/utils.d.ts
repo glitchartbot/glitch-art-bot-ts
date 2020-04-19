@@ -12,3 +12,11 @@ export interface ILog extends LogEntry {
 interface ExtendedError extends Error {
   id?: string
 }
+
+export interface CustomObject {
+  [key: string]: number | string
+}
+
+export interface Configuration {
+  [key: string]: number
+}
