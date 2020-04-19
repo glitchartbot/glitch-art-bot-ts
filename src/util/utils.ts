@@ -19,6 +19,12 @@ export const getParentTweetId = (tweet: Tweet) => tweet.in_reply_to_status_id_st
 export const hasValidImage = (tweet: Tweet) => 
   Boolean(tweet.entities.media && tweet.entities.media.filter(media => media.type === 'photo').length)
 
+export const isValidSketch = (sketchName: string): boolean =>
+  sketches.getAvailableSketchNames().find(sketch => sketch === sketchName) !== undefined
+
+export const isValidConfig = (text: string): boolean =>
+  Boolean(text.trim().match(/^(\w+ {0,}|\w+)((\w+=\d+) {0,}|(\w+=\d+)){0,}$$/gm))
+
 export const getFilePath = (sketch: SketchOption, file: IFile) => join(sketches.getAssetsPath(sketch), `${file.name}${file.format}`)
 
 export const getImageUrl = (tweet: Tweet, withSize: boolean) => 
@@ -29,13 +35,6 @@ export const getImageUrl = (tweet: Tweet, withSize: boolean) =>
 export const getFileFormat = (tweet: Tweet) => getImageUrl(tweet, false).match(/\.[0-9a-z]+$/i)![0]
 
 export const getTweetUrl = (tweet: Tweet) => `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
-
-export function isValidConfig(text: string): boolean {
-  const validFormat = Boolean(text.trim().match(/^\w+ ((\w+=\d+) |(\w+=\d+)){0,}$/gm));
-  const validSketch = sketches.getAvailableSketches().includes(text.split(' ')[0] || '');
-
-  return validFormat && validSketch;
-} 
 
 export async function downloadImage(uri: string, sketch: SketchOption, file: IFile) {
   try {
@@ -48,35 +47,15 @@ export async function downloadImage(uri: string, sketch: SketchOption, file: IFi
   }
 }
 
-export function sanitizeText(text: string) {
-  const removeHyphens = (str: string) => str.replace(/-/g, '')
-  
-  try {
-    let sanitized = text.trim()
+export const prepareOptions = (customOptions: string): string => 
+    customOptions
+      .trim()
       .replace(/\r?\n|\r/g, ' ')
       .split(' ')
-      .filter(el => el)
-      .filter(el => el[0] !== '@')
-      .map(removeHyphens)
-      .filter(el => el)
-  
-    let [script, ...options] = sanitized;
-    script = removeHyphens(script);
-  
-    return [script, options.join(' ')];
-  } catch (error) {
-    throw error;
-  }
+      .filter(el => el) // tirar espaços extras
+      .map(el => `--${el}`)
+      .join(' ')
 
-}
-
-export function saveSetupInfo(setupPath: string, file: IFile): void {
-  try {
-    writeFileSync(setupPath, `${file.name},${file.format}`)
-  } catch (error) {
-    throw error;
-  }
-}
 
 export function log(logEntry: ILog): void;
 export function log(logEntry: ILog, error: Error): void
