@@ -4,7 +4,7 @@ import { sketches, sketchesConfig } from './definitions';
 import { ISketch, SketchOption } from '../types/sketch';
 
 export enum PSketchesEnum {
-  pixelSort = 'pixelSort'
+  pixelsort = 'pixelsort'
 }
 
 const path = process.env.P3_PATH;
@@ -19,22 +19,19 @@ export const getDefaultConfig = (sketch: SketchOption) => {
   }, {} as { [key: string]: number });
 }
 
-export const getAvailableSketches = () => 
-  Object.keys(sketches).map(sketch => sketch.toLowerCase())
+export const getAvailableSketchNames = (): string[] =>
+  sketches.map(sketch => sketch.name)
 
-export const getSketch = (sketch: SketchOption): ISketch => ({...sketches[sketch]})
+export const getSketch = (sketchName: SketchOption): ISketch => 
+  sketches.find(sketch => sketch.name === sketchName) as ISketch;
 
-export const getProcessingCmd = (sketch: SketchOption) => 
-  `${path} --sketch=${join(sketchBase as string, sketches[sketch].name)} --run`
-
-
-export const getAssetsPath = (sketch: SketchOption) => 
-  join(sketchBase as string, sketches[sketch].assets);
-
-
-export const getDataPath = (sketch: SketchOption) => 
-  join(sketchBase as string, sketches[sketch].data);
+export const getProcessingCmd = (sketchName: SketchOption) => {
+  const sketch = getSketch(sketchName);
+  return `${path} --sketch=${join(sketchBase as string, sketch.name)} --run`
+}
 
 
-export const getSetupFilePath = (sketch: SketchOption) => 
-  join(sketchBase as string, sketches[sketch].setup)
+export const getAssetsPath = (sketchName: SketchOption) => {
+  const sketch = getSketch(sketchName);
+  return join(sketchBase as string, sketch.assets);
+}

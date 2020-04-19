@@ -1,18 +1,16 @@
 import { PSketchesEnum } from "./index"
-import { PSketches, SketchConfig } from "../types/sketch"
+import { SketchConfig } from "../types/sketch"
 
-export const sketches: PSketches = {
-  pixelSort: {
+export const sketches = [
+  {
     name: 'pixelsort',
-    data: 'pixelsort\\data',
-    setup: 'pixelsort\\data\\setup.txt',
     assets: 'pixelsort\\assets'
   }
-}
+]
 
 export const sketchesConfig: SketchConfig[] = [
   {
-    name: 'pixelSort' as PSketchesEnum.pixelSort,
+    name: 'pixelsort' as PSketchesEnum.pixelsort,
     parameters: ['mode']
   }
 ] 
