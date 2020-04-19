@@ -47,6 +47,7 @@ export function listenQuery(query: string | string[], callback: Function) {
 }
 
 export function replyTweet(tweetId: string): Promise<Tweet>
+export function replyTweet(tweetId: string, status: string): Promise<Tweet>
 export function replyTweet(tweetId: string, status?: string, sketch?: SketchOption, file?: IFile): Promise<Tweet>
 
 export async function replyTweet(tweetId: string, status?: string, sketch?: SketchOption, file?: IFile): Promise<Tweet> {
@@ -59,7 +60,7 @@ export async function replyTweet(tweetId: string, status?: string, sketch?: Sket
       status: `@${screenName}` 
     };
   
-    if (file && sketch) {
+    if (sketch && file) {
       uploaded = await uploadImage(sketch, file);
       params.media_ids = [uploaded.media_id_string];
     }
