@@ -6,21 +6,18 @@ import {
   getTweetUrl,
   getImageUrl,
   downloadImage,
-  saveSetupInfo
+  isValidSketch,
+  isValidConfig,
+  prepareOptions,
+  log
 } from '../src/util/utils';
-
-import {
-  getSetupFilePath
-} from '../src/sketch'
 
 import { 
   existsSync, 
   unlinkSync,
-  readFileSync,
-  writeFileSync
 } from 'fs';
 
-import { IFile } from '../src/types/utils'
+import { IFile, ILog } from '../src/types/utils'
 
 import * as tweets from './mocks/tweets';
 
@@ -47,7 +44,8 @@ test('retorna o caminho do arquivo desejado', () => {
     format: '.jpg'
   }
 
-  expect(getFilePath('pixelSort', imagem1)).toBe('C:\\Processing\\sketches-p3\\pixelsort\\assets\\imagem.jpg');
+  //TODO: Corrigir caminho de teste
+  expect(getFilePath('pixelsort', imagem1)).toBe('C:\\Processing\\sketches-p3\\pixelsort\\assets\\imagem.jpg');
 })
 
 test('retorna a url do tweet', () => {
@@ -72,21 +70,76 @@ test('baixa as imagens', async () => {
     format: '.png'
   }
 
-  await downloadImage('https://via.placeholder.com/1280', 'pixelSort', infoImagem);
-  expect(existsSync(getFilePath('pixelSort', infoImagem))).toBe(true);
-  unlinkSync(getFilePath('pixelSort', infoImagem));
+  await downloadImage('https://via.placeholder.com/1280', 'pixelsort', infoImagem);
+  expect(existsSync(getFilePath('pixelsort', infoImagem))).toBe(true);
+  unlinkSync(getFilePath('pixelsort', infoImagem));
 })
 
-test('salva as informações da imagem no arquivo de setup', () => {
-  const infoImagem: IFile = {
-    name: 'imagem',
-    format: '.png'
-  }
-  const expected = 'imagem,.png'
+test('valida se o sketch escolhido é válido', () => {
+  const validInputs = [
+    'pixelsort',
+  ]
+  const validResults = validInputs.filter(isValidSketch);
 
-  saveSetupInfo(getSetupFilePath('pixelSort'), infoImagem);
+  const invalidInputs = [
+    'pixelSort',
+    'pixel sort',
+    'pixel-sort',
+  ]
+  const invalidResults = invalidInputs.filter(isValidSketch);
 
-  const content = readFileSync(getSetupFilePath('pixelSort')).toString();
-  expect(content).toBe(expected);
-  writeFileSync(getSetupFilePath('pixelSort'), '');
+
+  expect(validResults.length).toBe(validInputs.length)
+  expect(invalidResults.length).toBe(0);
+})
+
+//TODO: Arrumar esses testes, os inválidos tá retornando correto mesmo tendo um valor válido no meio
+test('valida se o texto do tweet é válido para configuração', () => {
+  const validInputs = [
+    'somestring mode=2 photo=4',
+    'pixesort abc=1 def=5',
+    'another a=3',
+    'pixelsort',
+    'pixelsort    a=3 b=5',
+    'somestring mode=2       photo=4',
+    'somestring mode=2       photo=4         ',
+  ]
+  const validResults = validInputs.filter(isValidConfig);
+
+  const invalidInputs = [
+    'pixel sort ',
+    'pixel-sort --ab',
+    'pixelsort -a=4',
+    'pixelsort a=b',
+    'pixelsort a-b=5',
+    'pixleosrt ab=5 cd=f',
+    'pixelsort ab=6 =t=4',
+    'pixelsort bv=-',
+    'pixlesoort 6',
+    'pixelsort u-u=5',
+  ]
+  const invalidResults = invalidInputs.filter(isValidConfig);
+
+
+  expect(validResults.length).toBe(validInputs.length);
+  expect(invalidResults.length).toBe(0);
+})
+
+test('prepara as opções para serem lidas pelo yargs', () => {
+  const expected = '--mode=2 --photo=2';
+
+  const inputs = [
+    'mode=2 photo=2',
+    '\nmode=2\nphoto=2',
+    '\nmode=2 photo=2',
+    '    mode=2 photo=2',
+    'mode=2     photo=2',
+    'mode=2   \n photo=2',
+    'mode=2\n   photo=2',
+    'mode=2 photo=2   ',
+  ]
+
+  const allValid = inputs.filter(el => prepareOptions(el) === expected).length === inputs.length;
+
+  expect(allValid).toBe(true)
 })
