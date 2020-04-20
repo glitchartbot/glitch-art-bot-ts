@@ -66,6 +66,10 @@ test('retorna a url da imagem', () => {
   expect(getImageUrl(tweets.mediaNotExtended, true)).toBe('http://pbs.twimg.com/media/ERwMESlWkAconTy.png?name=large');
   expect(getImageUrl(tweets.multipleMediaExtended, false)).toBe('http://pbs.twimg.com/media/ESc6pLPWsAEC8Ln.jpg');
   expect(getImageUrl(tweets.multipleMediaExtended, true)).toBe('http://pbs.twimg.com/media/ESc6pLPWsAEC8Ln.jpg?name=large');
+  expect(getImageUrl(tweets.multipleMediaExtended, true)).toBe('http://pbs.twimg.com/media/ESc6pLPWsAEC8Ln.jpg?name=large');
+  expect(getImageUrl(tweets.multipleMediaExtended, true, 2)).toBe('http://pbs.twimg.com/media/ESc6pllWsAEirIo.jpg?name=large');
+  expect(getImageUrl(tweets.multipleMediaExtended, true, 1)).toBe('http://pbs.twimg.com/media/ESc6pLPWsAEC8Ln.jpg?name=large');
+  expect(getImageUrl(tweets.multipleMediaNotExtended, false, 1)).toBe('http://pbs.twimg.com/media/EWAXgzNWkAcpjvs.jpg');
 })
 
 test('baixa as imagens', async () => {
@@ -177,6 +181,6 @@ test('funde as opções com o padrão', () => {
   };
   const defaultPixelsort = getSketchConfig('pixelsort');
   const input = { photo: 2 };
-  
+
   expect(mergeOptions(defaultPixelsort.defaultConfig, input)).toStrictEqual(expected)
 })
