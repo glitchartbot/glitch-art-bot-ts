@@ -10,7 +10,7 @@ import logger from './logger';
 
 import { SketchOption } from '../types/sketch';
 import { Tweet, Media } from '../types/twitter/tweet';
-import { IFile, ILog } from '../types/utils';
+import { IFile, ILog, CustomObject, Configuration } from '../types/utils';
 
 const pipelineAsync = promisify(pipeline);
 
@@ -27,10 +27,27 @@ export const isValidConfig = (text: string): boolean =>
 
 export const getFilePath = (sketch: SketchOption, file: IFile) => join(sketches.getAssetsPath(sketch), `${file.name}${file.format}`)
 
-export const getImageUrl = (tweet: Tweet, withSize: boolean) => 
-  withSize ?
-  (tweet.entities.media!.find((media: Media) => media.type === 'photo')!.media_url).concat('?name=large') :
-  tweet.entities.media!.find((media: Media) => media.type === 'photo')!.media_url
+export const getOuputPath = (sketch: SketchOption, file: IFile) => join(sketches.getOutputPath(sketch), `${file.name}${file.format}`)
+
+export function getImageUrl(tweet: Tweet, withSize: boolean): string;
+export function getImageUrl(tweet: Tweet, withSize: boolean, index: number): string;
+
+export function getImageUrl(tweet: Tweet, withSize: boolean, index?: number): string {
+  const photos = tweet.extended_entities!.media!.filter(media => media.type === 'photo');
+  let finalIndex = 0;
+
+  if (index) {
+    if (index - 1 > photos!.length) {
+      finalIndex = photos!.length - 1;
+    } else {
+      finalIndex = index - 1;
+    }
+  } 
+
+  return withSize ?
+    photos![finalIndex].media_url.concat('?name=large') :
+    photos![finalIndex].media_url
+}
 
 export const getFileFormat = (tweet: Tweet) => getImageUrl(tweet, false).match(/\.[0-9a-z]+$/i)![0]
 
@@ -47,14 +64,29 @@ export async function downloadImage(uri: string, sketch: SketchOption, file: IFi
   }
 }
 
+export function stringifyConfig(config: Configuration, whitelist: string[]): string {
+  let result = '';
+
+  for (const [key, value] of Object.entries(config)) {
+    if (whitelist.includes(key)) {
+      result += `${key}=${value} `;
+    }
+  }
+
+  return result.trim();
+}
+
+export const mergeOptions = (defaultOptions: Configuration, customOptions: Configuration) => 
+  ({...defaultOptions, ...customOptions})
+
 export const prepareOptions = (customOptions: string): string => 
-    customOptions
-      .trim()
-      .replace(/\r?\n|\r/g, ' ')
-      .split(' ')
-      .filter(el => el) // tirar espaços extras
-      .map(el => `--${el}`)
-      .join(' ')
+  customOptions
+    .trim()
+    .replace(/\r?\n|\r/g, ' ')
+    .split(' ')
+    .filter(el => el) // tirar espaços extras
+    .map(el => `--${el}`)
+    .join(' ')
 
 
 export function log(logEntry: ILog): void;
