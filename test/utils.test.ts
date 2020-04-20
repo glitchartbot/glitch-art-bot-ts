@@ -10,7 +10,8 @@ import {
   isValidConfig,
   prepareOptions,
   log,
-  mergeOptions
+  mergeOptions,
+  removeMentions
 } from '../src/util/utils';
 
 import { 
@@ -184,4 +185,11 @@ test('funde as opções com o padrão', () => {
   const input = { photo: 2 };
 
   expect(mergeOptions(defaultPixelsort.defaultConfig, input)).toStrictEqual(expected)
+})
+
+test('remove as menções desnecessárias do texto', () => {
+  const expected = 'photo=2';
+  const input = '@AllAboutMariah @MariahCarey @WORLDMUSICAWARD @GlitchArtBot photo=2';
+
+  expect(removeMentions(input)).toBe(expected);
 })
