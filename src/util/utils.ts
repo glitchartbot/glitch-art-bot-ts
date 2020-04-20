@@ -23,7 +23,7 @@ export const isValidSketch = (sketchName: string): boolean =>
   getAvailableSketchNames().find(sketch => sketch === sketchName) !== undefined;
 
 export const isValidConfig = (text: string): boolean =>
-  Boolean(text.trim().match(/^(\w+ {0,}|\w+)((\w+=\d+) {0,}|(\w+=\d+)){0,}$$/gm));
+  Boolean(text.trim().match(/^(\w+=\d+( |)+){1,}$/gm));
 
 export const getFilePath = (sketch: SketchOption, file: IFile) => join(getAssetsPath(sketch), `${file.name}${file.format}`)
 
