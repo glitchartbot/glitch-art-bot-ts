@@ -42,7 +42,7 @@ async function onTweet(tweet: Tweet) {
       chosenSketch = getSketchConfig(sketchName as SketchOption);
     }
 
-    if (!utils.isValidConfig(tweetText)) {
+    if (!utils.isValidConfig(customOptions.join(' '))) {
       replyText = replies.defaultConfig;
       config = chosenSketch.defaultConfig;
     } else {
@@ -51,7 +51,7 @@ async function onTweet(tweet: Tweet) {
       config = yargsParser(sanitizedOptions);
       replyText = replies.standard;
     }
-
+    
     config = utils.mergeOptions(chosenSketch.defaultConfig, config);
 
     //Baixa a imagem do tweet
