@@ -26,7 +26,7 @@ async function onTweet(tweet: Tweet) {
     if (!parentId) return replyWithError(tweet.id_str, replies.orphanTweet);
 
     const parentTweet = await bot.getTweetById(parentId as string);
-    const tweetText = tweet.full_text ?? tweet.text as string;
+    const tweetText = utils.removeMentions(tweet.full_text ?? tweet.text as string);
     const [sketchName, ...customOptions] = tweetText.split(' ');
 
     let chosenSketch: SketchConfig;
@@ -35,10 +35,14 @@ async function onTweet(tweet: Tweet) {
     let sanitizedOptions: string;
 
     if (!utils.hasValidImage(parentTweet)) return replyWithError(tweet.id_str, replies.invalidImage);
-    if (!utils.isValidSketch(sketchName)) return replyWithError(tweet.id_str, replies.invalidSketch);
+    
+    if (!utils.isValidSketch(sketchName)) {
+      chosenSketch = getSketchConfig('pixelsort');
+    } else {
+      chosenSketch = getSketchConfig(sketchName as SketchOption);
+    }
 
     if (!utils.isValidConfig(tweetText)) {
-      chosenSketch = getSketchConfig('pixelsort');
       replyText = replies.defaultConfig;
       config = chosenSketch.defaultConfig;
     } else {
@@ -56,7 +60,7 @@ async function onTweet(tweet: Tweet) {
     await utils.downloadImage(imageUrl, chosenSketch.name, { name: tweetId, format });
 
     //Executa o comando que edita a imagem
-    const cmd = getProcessingCmd(chosenSketch.name, config);
+    const cmd = getProcessingCmd(chosenSketch.name, config, { name: tweetId, format: format });
     const { stdout, stderr } = await execAsync(cmd);
     
     //Responde o tweet que mencionou ele
@@ -78,4 +82,6 @@ function replyWithError(tweetId: string, reason: string) {
   bot.replyTweet(tweetId, reason);
 }
 
+console.log('Starting bot...');
+console.log('The bot started');
 bot.listenQuery('@GlitchArtBot', onTweet)
