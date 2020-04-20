@@ -3,7 +3,8 @@ import { Configuration } from './utils';
 
 export interface ISketch {
   name: string,
-  assets: string
+  assets: string,
+  output: string
 }
 
 export type SketchOption = keyof typeof PSketchesEnum
