@@ -42,14 +42,17 @@ export function getImageUrl(tweet: Tweet, withSize: boolean, index?: number): st
     } else {
       finalIndex = index - 1;
     }
-  } 
+  }
+
+  if (finalIndex < 0)
+    finalIndex = 0;
 
   return withSize ?
     photos![finalIndex].media_url.concat('?name=large') :
     photos![finalIndex].media_url
 }
 
-export const getFileFormat = (tweet: Tweet) => getImageUrl(tweet, false).match(/\.[0-9a-z]+$/i)![0]
+export const getFileFormat = (tweet: Tweet, index: number = 1) => getImageUrl(tweet, false, index).match(/\.[0-9a-z]+$/i)![0]
 
 export const getTweetUrl = (tweet: Tweet) => `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
 
