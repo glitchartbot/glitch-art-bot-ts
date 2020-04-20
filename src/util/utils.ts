@@ -31,9 +31,11 @@ export const getOuputPath = (sketch: SketchOption, file: IFile) => join(getOutpu
 
 export const removeMentions = (text: string): string => 
   text
+    .trim()
     .split(' ')
     .filter(el => !el.startsWith('@'))
     .join(' ')
+    .trim()
 
 export function getImageUrl(tweet: Tweet, withSize: boolean): string;
 export function getImageUrl(tweet: Tweet, withSize: boolean, index: number): string;
