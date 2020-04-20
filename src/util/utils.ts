@@ -4,7 +4,7 @@ const got = require('got');
 import { createWriteStream, writeFileSync } from 'fs';
 import { join } from 'path';
 import { pipeline } from 'stream';
-import * as sketches from '../sketch';
+import { getAvailableSketchNames, getAssetsPath, getOutputPath } from '../sketch';
 import { promisify } from 'util';
 import logger from './logger';
 
@@ -14,20 +14,26 @@ import { IFile, ILog, CustomObject, Configuration } from '../types/utils';
 
 const pipelineAsync = promisify(pipeline);
 
-export const getParentTweetId = (tweet: Tweet) => tweet.in_reply_to_status_id_str 
+export const getParentTweetId = (tweet: Tweet) => tweet.in_reply_to_status_id_str;
 
 export const hasValidImage = (tweet: Tweet) => 
-  Boolean(tweet.entities.media && tweet.entities.media.filter(media => media.type === 'photo').length)
+  Boolean(tweet.entities.media && tweet.entities.media.filter(media => media.type === 'photo').length);
 
 export const isValidSketch = (sketchName: string): boolean =>
-  sketches.getAvailableSketchNames().find(sketch => sketch === sketchName) !== undefined
+  getAvailableSketchNames().find(sketch => sketch === sketchName) !== undefined;
 
 export const isValidConfig = (text: string): boolean =>
-  Boolean(text.trim().match(/^(\w+ {0,}|\w+)((\w+=\d+) {0,}|(\w+=\d+)){0,}$$/gm))
+  Boolean(text.trim().match(/^(\w+ {0,}|\w+)((\w+=\d+) {0,}|(\w+=\d+)){0,}$$/gm));
 
-export const getFilePath = (sketch: SketchOption, file: IFile) => join(sketches.getAssetsPath(sketch), `${file.name}${file.format}`)
+export const getFilePath = (sketch: SketchOption, file: IFile) => join(getAssetsPath(sketch), `${file.name}${file.format}`)
 
-export const getOuputPath = (sketch: SketchOption, file: IFile) => join(sketches.getOutputPath(sketch), `${file.name}${file.format}`)
+export const getOuputPath = (sketch: SketchOption, file: IFile) => join(getOutputPath(sketch), `${file.name}${file.format}`)
+
+export const removeMentions = (text: string): string => 
+  text
+    .split(' ')
+    .filter(el => !el.startsWith('@'))
+    .join(' ')
 
 export function getImageUrl(tweet: Tweet, withSize: boolean): string;
 export function getImageUrl(tweet: Tweet, withSize: boolean, index: number): string;
