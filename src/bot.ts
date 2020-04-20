@@ -21,7 +21,7 @@ function uploadTweet(params: Params): Promise<Tweet> {
 }
 
 function uploadImage(sketch: SketchOption, file: IFile): Promise<UploadedMedia> {
-  const filePath = utils.getFilePath(sketch, file);
+  const filePath = utils.getOuputPath(sketch, file);
   const b64 = readFileSync(filePath, { encoding: 'base64' });
   const params: Params = { media_data: b64 };
 
