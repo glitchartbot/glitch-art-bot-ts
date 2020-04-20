@@ -1,7 +1,9 @@
 import { join } from 'path';
 
 import { sketches, sketchesConfig } from './definitions';
-import { ISketch, SketchOption } from '../types/sketch';
+import { ISketch, SketchOption, SketchConfig } from '../types/sketch';
+import { CustomObject, Configuration } from '../types/utils';
+import { stringifyConfig } from '../util/utils';
 
 export enum PSketchesEnum {
   pixelsort = 'pixelsort'
@@ -10,28 +12,33 @@ export enum PSketchesEnum {
 const path = process.env.P3_PATH;
 const sketchBase = process.env.P3_SKETCH_BASE;
 
-export const getDefaultConfig = (sketch: SketchOption) => {
-  const parameters = sketchesConfig.find(s => s.name === sketch)?.parameters;
-
-  return parameters?.reduce((acc, curr) => {
-    acc[curr] = 1;
-    return acc;
-  }, {} as { [key: string]: number });
-}
+export const getSketch = (sketchName: SketchOption): ISketch => 
+  sketches.find(sketch => sketch.name === sketchName) as ISketch
 
 export const getAvailableSketchNames = (): string[] =>
   sketches.map(sketch => sketch.name)
 
-export const getSketch = (sketchName: SketchOption): ISketch => 
-  sketches.find(sketch => sketch.name === sketchName) as ISketch;
-
-export const getProcessingCmd = (sketchName: SketchOption) => {
-  const sketch = getSketch(sketchName);
-  return `${path} --sketch=${join(sketchBase as string, sketch.name)} --run`
-}
-
+export const getSketchConfig = (sketchName: SketchOption): SketchConfig =>
+  sketchesConfig.find(sketch => sketch.name === sketchName) as SketchConfig;
 
 export const getAssetsPath = (sketchName: SketchOption) => {
   const sketch = getSketch(sketchName);
   return join(sketchBase as string, sketch.assets);
+}
+
+export const getOutputPath = (sketchName: SketchOption) => {
+  const sketch = getSketch(sketchName);
+  return join(sketchBase as string, sketch.output);
+}
+
+export function getProcessingCmd(sketchName: SketchOption): string;
+export function getProcessingCmd(sketchName: SketchOption, configuration: Configuration): string;
+
+export function getProcessingCmd(sketchName: SketchOption, configuration?: Configuration): string {
+  const sketch = getSketch(sketchName);
+  const sketchConfig = getSketchConfig(sketchName);
+  const purePath = `${path} --sketch=${join(sketchBase as string, sketch.name)} --run`;
+  const args = configuration ? stringifyConfig(configuration, sketchConfig.parameters) : '';
+
+  return [purePath, args].join(' ').trim();
 }
