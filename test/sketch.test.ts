@@ -2,6 +2,7 @@ import {
   getSketch,
   getProcessingCmd,
   getAssetsPath,
+  getAvailableSketchNames,
 } from '../src/sketch';
 
 import { ISketch } from '../src/types/sketch'
@@ -34,4 +35,9 @@ test('retorna o caminho da pasta de recursos (fontes)', () => {
   const matches = pathAssets.match(regex);
 
   expect(matches).toBeTruthy();
+})
+
+test('retorna o nome dos sketches disponíveis', () => {
+  const expected = ['pixelsort'];
+  expect(getAvailableSketchNames().sort()).toEqual(expected.sort())
 })
