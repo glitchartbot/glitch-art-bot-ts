@@ -9,7 +9,8 @@ import { ISketch } from '../src/types/sketch'
 test('retorna o sketch', () => {
   const expected: ISketch = {
     name: 'pixelsort',
-    assets: 'pixelsort\\assets'
+    assets: 'pixelsort\\assets',
+    output: 'pixelsort\\output'
   }
 
   expect(getSketch('pixelsort')).toStrictEqual(expected)

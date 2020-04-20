@@ -70,6 +70,7 @@ test('retorna a url da imagem', () => {
   expect(getImageUrl(tweets.multipleMediaExtended, true, 2)).toBe('http://pbs.twimg.com/media/ESc6pllWsAEirIo.jpg?name=large');
   expect(getImageUrl(tweets.multipleMediaExtended, true, 1)).toBe('http://pbs.twimg.com/media/ESc6pLPWsAEC8Ln.jpg?name=large');
   expect(getImageUrl(tweets.multipleMediaNotExtended, false, 1)).toBe('http://pbs.twimg.com/media/EWAXgzNWkAcpjvs.jpg');
+  expect(getImageUrl(tweets.multipleMediaNotExtended, false, -1)).toBe('http://pbs.twimg.com/media/EWAXgzNWkAcpjvs.jpg');
 })
 
 test('baixa as imagens', async () => {
