@@ -3,6 +3,7 @@ import {
   getProcessingCmd,
   getAssetsPath,
   getAvailableSketchNames,
+  getSketchConfig,
 } from '../src/sketch';
 
 import { ISketch } from '../src/types/sketch'
@@ -40,4 +41,17 @@ test('retorna o caminho da pasta de recursos (fontes)', () => {
 test('retorna o nome dos sketches disponíveis', () => {
   const expected = ['pixelsort'];
   expect(getAvailableSketchNames().sort()).toEqual(expected.sort())
+})
+
+test('retorna a configuração do sketch', () => {
+  const expected = {
+    name: 'pixelsort',
+    parameters: ['mode'],
+    defaultConfig: {
+      photo: 1,
+      mode: 1
+    }
+  }
+
+  expect(getSketchConfig('pixelsort')).toStrictEqual(expected)
 })
