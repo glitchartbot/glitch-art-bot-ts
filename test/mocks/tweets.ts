@@ -901,6 +901,234 @@ const multipleMediaExtended: Tweet = {
   "lang": "pt"
 }
 
+const multipleMediaNotExtended: Tweet = {
+    "created_at": "Mon Apr 20 00:09:26 +0000 2020",
+    "id": 1252026551790637057,
+    "id_str": "1252026551790637057",
+    "text": "@Cloud9 C9 after winning finals https://t.co/9maxsveNwr",
+    "truncated": false,
+    "entities": {
+        "hashtags": [],
+        "symbols": [],
+        "user_mentions": [
+            {
+                "screen_name": "Cloud9",
+                "name": "Cloud9 vs COVID19",
+                "id": 1452520626,
+                "id_str": "1452520626",
+                "indices": [
+                    0,
+                    7
+                ]
+            }
+        ],
+        "urls": [],
+        "media": [
+            {
+                "id": 1252026548678463495,
+                "id_str": "1252026548678463495",
+                "indices": [
+                    32,
+                    55
+                ],
+                "media_url": "http://pbs.twimg.com/media/EWAXgzNWkAcpjvs.jpg",
+                "media_url_https": "https://pbs.twimg.com/media/EWAXgzNWkAcpjvs.jpg",
+                "url": "https://t.co/9maxsveNwr",
+                "display_url": "pic.twitter.com/9maxsveNwr",
+                "expanded_url": "https://twitter.com/lolYisus/status/1252026551790637057/photo/1",
+                "type": "photo",
+                "sizes": {
+                    "thumb": {
+                        "w": 150,
+                        "h": 150,
+                        "resize": "crop"
+                    },
+                    "large": {
+                        "w": 279,
+                        "h": 157,
+                        "resize": "fit"
+                    },
+                    "medium": {
+                        "w": 279,
+                        "h": 157,
+                        "resize": "fit"
+                    },
+                    "small": {
+                        "w": 279,
+                        "h": 157,
+                        "resize": "fit"
+                    }
+                }
+            }
+        ]
+    },
+    "extended_entities": {
+        "media": [
+            {
+                "id": 1252026548678463495,
+                "id_str": "1252026548678463495",
+                "indices": [
+                    32,
+                    55
+                ],
+                "media_url": "http://pbs.twimg.com/media/EWAXgzNWkAcpjvs.jpg",
+                "media_url_https": "https://pbs.twimg.com/media/EWAXgzNWkAcpjvs.jpg",
+                "url": "https://t.co/9maxsveNwr",
+                "display_url": "pic.twitter.com/9maxsveNwr",
+                "expanded_url": "https://twitter.com/lolYisus/status/1252026551790637057/photo/1",
+                "type": "photo",
+                "sizes": {
+                    "thumb": {
+                        "w": 150,
+                        "h": 150,
+                        "resize": "crop"
+                    },
+                    "large": {
+                        "w": 279,
+                        "h": 157,
+                        "resize": "fit"
+                    },
+                    "medium": {
+                        "w": 279,
+                        "h": 157,
+                        "resize": "fit"
+                    },
+                    "small": {
+                        "w": 279,
+                        "h": 157,
+                        "resize": "fit"
+                    }
+                }
+            },
+            {
+                "id": 1252026548707868672,
+                "id_str": "1252026548707868672",
+                "indices": [
+                    32,
+                    55
+                ],
+                "media_url": "http://pbs.twimg.com/media/EWAXgzUXQAA2R63.jpg",
+                "media_url_https": "https://pbs.twimg.com/media/EWAXgzUXQAA2R63.jpg",
+                "url": "https://t.co/9maxsveNwr",
+                "display_url": "pic.twitter.com/9maxsveNwr",
+                "expanded_url": "https://twitter.com/lolYisus/status/1252026551790637057/photo/1",
+                "type": "photo",
+                "sizes": {
+                    "small": {
+                        "w": 315,
+                        "h": 177,
+                        "resize": "fit"
+                    },
+                    "thumb": {
+                        "w": 150,
+                        "h": 150,
+                        "resize": "crop"
+                    },
+                    "medium": {
+                        "w": 315,
+                        "h": 177,
+                        "resize": "fit"
+                    },
+                    "large": {
+                        "w": 315,
+                        "h": 177,
+                        "resize": "fit"
+                    }
+                }
+            }
+        ]
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": 1252024929106755585,
+    "in_reply_to_status_id_str": "1252024929106755585",
+    "in_reply_to_user_id": 1452520626,
+    "in_reply_to_user_id_str": "1452520626",
+    "in_reply_to_screen_name": "Cloud9",
+    "user": {
+        "id": 3430992539,
+        "id_str": "3430992539",
+        "name": "Yisus",
+        "screen_name": "lolYisus",
+        "location": "UConn",
+        "description": "Superstar Master Tier Jungler - streamer @ https://t.co/vkOZZ0Sstr - @YisusAlt",
+        "url": "https://t.co/MuQLDfbt46",
+        "entities": {
+            "url": {
+                "urls": [
+                    {
+                        "url": "https://t.co/MuQLDfbt46",
+                        "expanded_url": "https://www.youtube.com/mYisus?sub_confirmation=1",
+                        "display_url": "youtube.com/mYisus?sub_con…",
+                        "indices": [
+                            0,
+                            23
+                        ]
+                    }
+                ]
+            },
+            "description": {
+                "urls": [
+                    {
+                        "url": "https://t.co/vkOZZ0Sstr",
+                        "expanded_url": "http://twitch.tv/YisusNA",
+                        "display_url": "twitch.tv/YisusNA",
+                        "indices": [
+                            43,
+                            66
+                        ]
+                    }
+                ]
+            }
+        },
+        "protected": false,
+        "followers_count": 40665,
+        "friends_count": 568,
+        "listed_count": 42,
+        "created_at": "Wed Aug 19 04:58:39 +0000 2015",
+        "favourites_count": 72352,
+        "utc_offset": null,
+        "time_zone": null,
+        "geo_enabled": true,
+        "verified": false,
+        "statuses_count": 30211,
+        "lang": null,
+        "contributors_enabled": false,
+        "is_translator": false,
+        "is_translation_enabled": false,
+        "profile_background_color": "C0DEED",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_tile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1220928237947117568/bnZo0sCK_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1220928237947117568/bnZo0sCK_normal.jpg",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/3430992539/1559971896",
+        "profile_link_color": "1DA1F2",
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "has_extended_profile": true,
+        "default_profile": true,
+        "default_profile_image": false,
+        "following": false,
+        "follow_request_sent": false,
+        "notifications": false,
+        "translator_type": "none"
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 98,
+    "favorite_count": 1571,
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "possibly_sensitive_appealable": false,
+    "lang": "en"
+}
+
 export { 
   mediaNotExtended, 
   mediaExtended, 
@@ -908,5 +1136,6 @@ export {
   noMediaNotExtended, 
   sonTweet, 
   orphanTweet, 
-  multipleMediaExtended 
+  multipleMediaExtended,
+  multipleMediaNotExtended
 }
