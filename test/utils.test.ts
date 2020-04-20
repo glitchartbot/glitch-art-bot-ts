@@ -106,27 +106,26 @@ test('valida se o sketch escolhido é válido', () => {
 //TODO: Arrumar esses testes, os inválidos tá retornando correto mesmo tendo um valor válido no meio
 test('valida se o texto do tweet é válido para configuração', () => {
   const validInputs = [
-    'somestring mode=2 photo=4',
-    'pixesort abc=1 def=5',
-    'another a=3',
-    'pixelsort',
-    'pixelsort    a=3 b=5',
-    'somestring mode=2       photo=4',
-    'somestring mode=2       photo=4         ',
+    ' mode=2 photo=4',
+    ' abc=1 def=5',
+    'a=3',
+    '    a=3 b=5',
+    ' mode=2       photo=4',
+    'mode=2       photo=4         ',
   ]
   const validResults = validInputs.filter(isValidConfig);
 
   const invalidInputs = [
-    'pixel sort ',
+    'pixelsort ',
     'pixel-sort --ab',
-    'pixelsort -a=4',
-    'pixelsort a=b',
-    'pixelsort a-b=5',
-    'pixleosrt ab=5 cd=f',
-    'pixelsort ab=6 =t=4',
-    'pixelsort bv=-',
-    'pixlesoort 6',
-    'pixelsort u-u=5',
+    ' -a=4',
+    ' a=b',
+    'a-b=5',
+    '  a= ab=5 cd=f',
+    'ab=6 =t=4',
+    'bv=-',
+    '6',
+    'u-u=5',
   ]
   const invalidResults = invalidInputs.filter(isValidConfig);
 
