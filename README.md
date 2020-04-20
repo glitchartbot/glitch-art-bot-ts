@@ -6,7 +6,7 @@ Bot do Twitter (@GlitchArtBot) que aplica efeitos de glitch art em imagens.
 
 ## Como funciona
 
-O bot usa as credenciais dele, conecta na stream do Twitter e fica "ouvindo" quando algum usuário menciona o nome de usuário dele, então ele verifica se o tweet "pai" do qual ele foi mencionado tem uma imagem válida (arquivos classificados como `photo` pelo Twitter), se tiver, o bot baixa a imagem, atualiza o arquivo usado como configuração pro processamente da imagem, cria um processo filho e executa um comando que aplica os efeitos na imagem, então responde o usuário que mencionou o bot com a imagem editada.
+O bot usa as credenciais dele, conecta na stream do Twitter e fica "ouvindo" quando algum usuário menciona o nome de usuário dele, então ele verifica se o tweet "pai" do qual ele foi mencionado tem uma imagem válida (arquivos classificados como `photo` pelo Twitter), se tiver, o bot baixa a imagem, cria um processo filho e executa um comando que aplica os efeitos na imagem, então responde o usuário que mencionou o bot com a imagem editada.
 
 ## Como usar
 
