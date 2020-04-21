@@ -10,15 +10,13 @@ O bot usa as credenciais dele, conecta na stream do Twitter e fica "ouvindo" qua
 
 ## Como usar
 
-Por enquanto o bot só tem um script disponível, então ele o usa por padrão. Pra usar é só mencionar o bot (@GlitchArtBot) como resposta em qualquer tweet que tenha uma imagem. Tenho planos pra adicionar mais scripts e opções pra personalizar os scripts.
-
-*Obs.: Tanto o usuário que menciona o bot quanto o usuário que postou o tweet que tem a imagem **NÃO** podem ter os tweets "protegidos", senão o bot não consegue enxergar os tweets.*
+Tem um repositório só pra isso, olha que incrível! [Clica aqui](https://github.com/friaca/glitch-art-bot-scripts) pra uma explicação detalhada de como usar e personalizar o bot! :)
 
 ## Scripts disponíveis
 
 **Por mais que a maioria, (senão todos) os scripts não sejam de autoria minha, eles tiveram que ser ajustados pra funcionarem corretamente com o bot. Pra ver os scripts usados pelo bot e como usá-los, ~~clique aqui~~ (em breve).*
 
-- Pixel Sort pelo [Kim Asendorf](https://github.com/kimasendorf) ([fonte](https://github.com/kimasendorf/ASDFPixelSort/blob/master/ASDFPixelSort.pde))
+- Pixel Sort pelo [Kim Asendorf](https://github.com/kimasendorf)
 
 ## TODO
 
