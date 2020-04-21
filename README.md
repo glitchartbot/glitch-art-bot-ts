@@ -10,7 +10,7 @@ O bot usa as credenciais dele, conecta na stream do Twitter e fica "ouvindo" qua
 
 ## Como usar
 
-Tem um repositório só pra isso, olha que incrível! [Clica aqui](https://github.com/friaca/glitch-art-bot-scripts) pra uma explicação detalhada de como usar e personalizar o bot! :)
+Tem um repositório só pra isso, olha que incrível! [Clique aqui](https://github.com/friaca/glitch-art-bot-scripts) pra uma explicação detalhada de como usar e personalizar o bot! :)
 
 ## Scripts disponíveis
 
