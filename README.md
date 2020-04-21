@@ -14,7 +14,7 @@ Tem um repositório só pra isso, olha que incrível! [Clica aqui](https://githu
 
 ## Scripts disponíveis
 
-**Por mais que a maioria, (senão todos) os scripts não sejam de autoria minha, eles tiveram que ser ajustados pra funcionarem corretamente com o bot. Pra ver os scripts usados pelo bot e como usá-los, ~~clique aqui~~ (em breve).*
+**Por mais que a maioria, (senão todos) os scripts não sejam de autoria minha, eles tiveram que ser ajustados pra funcionarem corretamente com o bot. Pra ver os scripts usados pelo bot e como usá-los, [clique aqui](https://github.com/friaca/glitch-art-bot-scripts).*
 
 - Pixel Sort pelo [Kim Asendorf](https://github.com/kimasendorf)
 
