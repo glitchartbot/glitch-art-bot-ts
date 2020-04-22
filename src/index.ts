@@ -2,7 +2,7 @@ import './util/secrets';
 
 import * as bot from './bot';
 import * as utils from './util/utils';
-import './util/replies';
+import replies from './util/replies';
 import { promisify } from 'util';
 import { getProcessingCmd, getSketchConfig } from './sketch';
 import { exec } from 'child_process';
@@ -10,7 +10,6 @@ import yargsParser from 'yargs-parser';
 
 import { ILog, Configuration } from './types/utils';
 import { Tweet } from './types/twitter/tweet';
-import replies from './util/replies';
 import { SketchConfig, SketchOption } from './types/sketch';
 
 
