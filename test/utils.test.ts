@@ -104,7 +104,6 @@ test('valida se o sketch escolhido é válido', () => {
   expect(invalidResults.length).toBe(0);
 })
 
-//TODO: Arrumar esses testes, os inválidos tá retornando correto mesmo tendo um valor válido no meio
 test('valida se o texto do tweet é válido para configuração', () => {
   const validInputs = [
     ' mode=2 photo=4',
