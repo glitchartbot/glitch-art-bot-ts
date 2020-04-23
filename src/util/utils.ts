@@ -96,8 +96,9 @@ export function deleteFile(sketch: SketchOption, file: IFile): void {
   const assets = join(getAssetsPath(sketch), `${file.name}${file.format}`);
   const output = join(getOutputPath(sketch), `${file.name}${file.format}`);
 
-  unlink(assets, () => {});
-  unlink(output, () => {});
+  unlink(assets, () => {
+    unlink(output, () => {});
+  });
 }
 
 export const mergeOptions = (defaultOptions: Configuration, customOptions: Configuration) => 
