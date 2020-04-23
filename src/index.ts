@@ -33,7 +33,7 @@ async function onTweet(tweet: Tweet) {
     let config: Configuration;
     let sanitizedOptions: string;
 
-    if (!utils.hasValidImage(parentTweet)) return replyWithError(tweet.id_str, replies.invalidImage);
+    if (!utils.hasValidImage(parentTweet)) return;
     
     if (!utils.isValidSketch(sketchName)) {
       chosenSketch = getSketchConfig('pixelsort');
