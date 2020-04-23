@@ -66,9 +66,9 @@ async function onTweet(tweet: Tweet) {
     const { stdout, stderr } = await execAsync(cmd);
 
     if (stderr) {
-      utils.log({ level: 'error', message: 'Não consegui editar a imagem', id: tweet.id_str})
+      utils.log({ level: 'error', message: 'Não foi possível editar a imagem', id: tweet.id_str})
     } else {
-      utils.log({ level: 'log', message: 'Consegui editar a imagem', id: tweet.id_str });
+      utils.log({ level: 'log', message: 'A imagem foi editada', id: tweet.id_str });
     }
     
     //Responde o tweet que mencionou ele
@@ -78,7 +78,7 @@ async function onTweet(tweet: Tweet) {
       utils.log({ level: 'log', message: 'Respondido o tweet com imagem editada', id: tweet.id_str });
       utils.deleteFile(chosenSketch.name, file);
     } else {
-      utils.log({ level: 'error', message: 'Não respondi o tweet com a imagem editada', id: tweet.id_str})
+      utils.log({ level: 'error', message: 'O tweet não foi respondido com a imagem editada', id: tweet.id_str})
     }
   } catch (error) {
       const log: ILog = {
