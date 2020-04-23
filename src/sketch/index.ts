@@ -3,7 +3,7 @@ import { join } from 'path';
 import { sketches, sketchesConfig } from './definitions';
 import { ISketch, SketchOption, SketchConfig } from '../types/sketch';
 import { CustomObject, Configuration, IFile } from '../types/utils';
-import { stringifyConfig } from '../util/utils';
+import { stringifyConfig, translatePath } from '../util/utils';
 
 export enum PSketchesEnum {
   pixelsort = 'pixelsort'
@@ -23,12 +23,12 @@ export const getSketchConfig = (sketchName: SketchOption): SketchConfig =>
 
 export const getAssetsPath = (sketchName: SketchOption) => {
   const sketch = getSketch(sketchName);
-  return join(sketchBase as string, sketch.assets);
+  return join(sketchBase as string, translatePath(sketch.assets));
 };
 
 export const getOutputPath = (sketchName: SketchOption) => {
   const sketch = getSketch(sketchName);
-  return join(sketchBase as string, sketch.output);
+  return join(sketchBase as string, translatePath(sketch.output));
 };
 
 export function getProcessingCmd(sketchName: SketchOption): string;

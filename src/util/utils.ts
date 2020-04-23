@@ -87,6 +87,10 @@ export function stringifyConfig(config: Configuration, whitelist: string[]): str
   return result.trim();
 }
 
+export function translatePath(path: string, env?: string): string {
+  const environment = env ?? process.env.NODE_ENV as string;
+  return environment === 'production' ? path.replace(/\\/g, '/') : path;
+} 
 
 export function deleteFile(sketch: SketchOption, file: IFile): void {
   const assets = join(getAssetsPath(sketch), `${file.name}${file.format}`);
