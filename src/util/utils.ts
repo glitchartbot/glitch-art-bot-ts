@@ -1,7 +1,7 @@
 // got não exporta ou não tem definições
 const got = require('got');
 
-import { createWriteStream, writeFileSync } from 'fs';
+import { createWriteStream, writeFileSync, unlink } from 'fs';
 import { join } from 'path';
 import { pipeline } from 'stream';
 import { getAvailableSketchNames, getAssetsPath, getOutputPath } from '../sketch';
@@ -85,6 +85,15 @@ export function stringifyConfig(config: Configuration, whitelist: string[]): str
   }
 
   return result.trim();
+}
+
+
+export function deleteFile(sketch: SketchOption, file: IFile): void {
+  const assets = join(getAssetsPath(sketch), `${file.name}${file.format}`);
+  const output = join(getOutputPath(sketch), `${file.name}${file.format}`);
+
+  unlink(assets, () => {});
+  unlink(output, () => {});
 }
 
 export const mergeOptions = (defaultOptions: Configuration, customOptions: Configuration) => 

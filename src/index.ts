@@ -8,7 +8,7 @@ import { getProcessingCmd, getSketchConfig } from './sketch';
 import { exec } from 'child_process';
 import yargsParser from 'yargs-parser';
 
-import { ILog, Configuration } from './types/utils';
+import { ILog, Configuration, IFile } from './types/utils';
 import { Tweet } from './types/twitter/tweet';
 import { SketchConfig, SketchOption } from './types/sketch';
 
@@ -56,16 +56,18 @@ async function onTweet(tweet: Tweet) {
     //Baixa a imagem do tweet
     const imageUrl = utils.getImageUrl(parentTweet, true, config.photo);
     const format = utils.getFileFormat(parentTweet, config.photo);
-    await utils.downloadImage(imageUrl, chosenSketch.name, { name: tweetId, format });
+    const file: IFile = { name: tweetId, format };
+    await utils.downloadImage(imageUrl, chosenSketch.name, file);
 
     //Executa o comando que edita a imagem
-    const cmd = getProcessingCmd(chosenSketch.name, config, { name: tweetId, format: format });
+    const cmd = getProcessingCmd(chosenSketch.name, config, file);
     const { stdout, stderr } = await execAsync(cmd);
     
     //Responde o tweet que mencionou ele
-    const reply = await bot.replyTweet(tweetId, replyText, chosenSketch.name, { name: tweetId, format: format });
-
+    const reply = await bot.replyTweet(tweetId, replyText, chosenSketch.name, file);
     console.log('Sucesso: ' + tweet.id_str);
+
+    utils.deleteFile(chosenSketch.name, file);
   } catch (error) {
       const log: ILog = {
         level: 'error',
