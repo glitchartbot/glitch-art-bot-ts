@@ -24,7 +24,7 @@ async function onTweet(tweet: Tweet) {
     
     if (!parentId) return replyWithError(tweet.id_str, replies.orphanTweet);
     
-    utils.log({ level: 'log', message: 'Tweet válido recebido na stream', id: tweet.id_str });
+    utils.log({ level: 'info', message: 'Tweet válido recebido na stream', id: tweet.id_str });
 
     const parentTweet = await bot.getTweetById(parentId as string);
     const tweetText = utils.removeMentions(tweet.full_text ?? tweet.text as string);
@@ -68,14 +68,14 @@ async function onTweet(tweet: Tweet) {
     if (stderr) {
       utils.log({ level: 'error', message: 'Não foi possível editar a imagem', id: tweet.id_str})
     } else {
-      utils.log({ level: 'log', message: 'A imagem foi editada', id: tweet.id_str });
+      utils.log({ level: 'info', message: 'A imagem foi editada', id: tweet.id_str });
     }
     
     //Responde o tweet que mencionou ele
     const reply = await bot.replyTweet(tweetId, replyText, chosenSketch.name, file);
 
     if (reply.id_str) {
-      utils.log({ level: 'log', message: 'Respondido o tweet com imagem editada', id: tweet.id_str });
+      utils.log({ level: 'info', message: 'Respondido o tweet com imagem editada', id: tweet.id_str });
       utils.deleteFile(chosenSketch.name, file);
     } else {
       utils.log({ level: 'error', message: 'O tweet não foi respondido com a imagem editada', id: tweet.id_str})
