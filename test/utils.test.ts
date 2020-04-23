@@ -11,7 +11,8 @@ import {
   prepareOptions,
   log,
   mergeOptions,
-  removeMentions
+  removeMentions,
+  translatePath
 } from '../src/util/utils';
 
 import { 
@@ -194,4 +195,18 @@ test('remove as menções desnecessárias do texto', () => {
   const input = '@AllAboutMariah @MariahCarey @WORLDMUSICAWARD @GlitchArtBot photo=2';
 
   expect(removeMentions(input)).toBe(expected);
+})
+
+test('traduz os caminhos em cada ambiente', () => {
+  const NODE_ENV_DEV = 'development';
+  const NODE_ENV_PROD = 'production';
+
+  const regex_dev = /w+\\w+/g;
+  const regex_prod = /w+\/w+/g;
+
+  const path_dev = 'sketch\\output';
+  const path_prod = 'sketch/output';
+
+  expect(translatePath(path_dev, NODE_ENV_DEV)).toBe(path_dev);
+  expect(translatePath(path_prod, NODE_ENV_PROD)).toBe(path_prod);
 })
