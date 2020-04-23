@@ -23,6 +23,8 @@ async function onTweet(tweet: Tweet) {
     const parentId = utils.getParentTweetId(tweet);
     
     if (!parentId) return replyWithError(tweet.id_str, replies.orphanTweet);
+    
+    utils.log({ level: 'log', message: 'Tweet válido recebido na stream', id: tweet.id_str });
 
     const parentTweet = await bot.getTweetById(parentId as string);
     const tweetText = utils.removeMentions(tweet.full_text ?? tweet.text as string);
@@ -62,18 +64,28 @@ async function onTweet(tweet: Tweet) {
     //Executa o comando que edita a imagem
     const cmd = getProcessingCmd(chosenSketch.name, config, file);
     const { stdout, stderr } = await execAsync(cmd);
+
+    if (stderr) {
+      utils.log({ level: 'error', message: 'Não consegui editar a imagem', id: tweet.id_str})
+    } else {
+      utils.log({ level: 'log', message: 'Consegui editar a imagem', id: tweet.id_str });
+    }
     
     //Responde o tweet que mencionou ele
     const reply = await bot.replyTweet(tweetId, replyText, chosenSketch.name, file);
-    console.log('Sucesso: ' + tweet.id_str);
 
-    utils.deleteFile(chosenSketch.name, file);
+    if (reply.id_str) {
+      utils.log({ level: 'log', message: 'Respondido o tweet com imagem editada', id: tweet.id_str });
+      utils.deleteFile(chosenSketch.name, file);
+    } else {
+      utils.log({ level: 'error', message: 'Não respondi o tweet com a imagem editada', id: tweet.id_str})
+    }
   } catch (error) {
       const log: ILog = {
         level: 'error',
-        ...error
+        message: error.message
       }
-
+      
       utils.log(log, error);
       throw error;
   }
