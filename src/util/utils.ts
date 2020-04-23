@@ -1,7 +1,7 @@
 // got não exporta ou não tem definições
 const got = require('got');
 
-import { createWriteStream, writeFileSync, unlink } from 'fs';
+import { createWriteStream, writeFileSync, unlink, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import { pipeline } from 'stream';
 import { getAvailableSketchNames, getAssetsPath, getOutputPath } from '../sketch';
@@ -123,8 +123,12 @@ export function log(logEntry: ILog, error?: Error, tweet?: Tweet): void {
 
   if (error || tweet) { 
     const json = JSON.stringify({error, tweet}, null, 2)
-    const logId = tweet ? tweet.id_str : 'nt_' + Date.now()
+    const logId = Date.now()
 
+    if (!existsSync('./logs')) {
+      mkdirSync('./logs')
+    }
+    
     writeFileSync(`logs/${logId}.json`, json)
   }
 }
