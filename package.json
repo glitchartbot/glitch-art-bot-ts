@@ -26,7 +26,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc && node build/index.js",
-    "test": "jest"
+    "test": "jest",
+    "prettier": "prettier --write --config ./.prettierrc \"src/**/*.ts\""
   },
   "repository": {
     "type": "git",
