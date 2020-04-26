@@ -17,6 +17,8 @@ const execAsync = promisify(exec);
 async function onTweet(tweet: Tweet) {
   if (tweet.in_reply_to_user_id_str == bot.ID) return;
 
+  let baseLog = { id: tweet.id_str };
+
   try {
     const tweetId = tweet.id_str;
     const parentId = utils.getParentTweetId(tweet);
@@ -26,7 +28,7 @@ async function onTweet(tweet: Tweet) {
     utils.log({
       level: 'info',
       message: 'Tweet válido recebido na stream',
-      id: tweet.id_str,
+      ...baseLog,
     });
 
     const parentTweet = await bot.getTweetById(parentId as string);
@@ -72,13 +74,13 @@ async function onTweet(tweet: Tweet) {
       utils.log({
         level: 'error',
         message: 'Não foi possível editar a imagem',
-        id: tweet.id_str,
+        ...baseLog,
       });
     } else {
       utils.log({
         level: 'info',
         message: 'A imagem foi editada',
-        id: tweet.id_str,
+        ...baseLog,
       });
     }
 
@@ -89,7 +91,7 @@ async function onTweet(tweet: Tweet) {
       utils.log({
         level: 'info',
         message: 'Respondido o tweet com imagem editada',
-        id: tweet.id_str,
+        ...baseLog,
       });
 
       utils.deleteFile(chosenSketch.name, file);
@@ -97,14 +99,14 @@ async function onTweet(tweet: Tweet) {
       utils.log({
         level: 'error',
         message: 'O tweet não foi respondido com a imagem editada',
-        id: tweet.id_str,
+        ...baseLog,
       });
     }
   } catch (error) {
     const log: ILog = {
       level: 'error',
       message: error.message,
-      id: tweet.id_str,
+      ...baseLog,
     };
 
     utils.log(log, error);
