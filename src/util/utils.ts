@@ -16,8 +16,10 @@ const pipelineAsync = promisify(pipeline);
 
 export const getParentTweetId = (tweet: Tweet) => tweet.in_reply_to_status_id_str;
 
-export const hasValidImage = (tweet: Tweet) => 
-  Boolean(tweet.entities.media && tweet.entities.media.filter(media => media.type === 'photo').length);
+export const hasValidImage = (tweet: Tweet) =>
+  Boolean(
+    tweet.entities.media && tweet.entities.media.filter(media => media.type === 'photo').length
+  );
 
 export const isValidSketch = (sketchName: string): boolean =>
   getAvailableSketchNames().find(sketch => sketch === sketchName) !== undefined;
@@ -25,17 +27,19 @@ export const isValidSketch = (sketchName: string): boolean =>
 export const isValidConfig = (text: string): boolean =>
   Boolean(text.trim().match(/^(\w+=\d+( |)+){1,}$/gm));
 
-export const getFilePath = (sketch: SketchOption, file: IFile) => join(getAssetsPath(sketch), `${file.name}${file.format}`)
+export const getFilePath = (sketch: SketchOption, file: IFile) =>
+  join(getAssetsPath(sketch), `${file.name}${file.format}`);
 
-export const getOuputPath = (sketch: SketchOption, file: IFile) => join(getOutputPath(sketch), `${file.name}${file.format}`)
+export const getOuputPath = (sketch: SketchOption, file: IFile) =>
+  join(getOutputPath(sketch), `${file.name}${file.format}`);
 
-export const removeMentions = (text: string): string => 
+export const removeMentions = (text: string): string =>
   text
     .trim()
     .split(' ')
     .filter(el => !el.startsWith('@'))
     .join(' ')
-    .trim()
+    .trim();
 
 export function getImageUrl(tweet: Tweet, withSize: boolean): string;
 export function getImageUrl(tweet: Tweet, withSize: boolean, index: number): string;
@@ -52,24 +56,22 @@ export function getImageUrl(tweet: Tweet, withSize: boolean, index?: number): st
     }
   }
 
-  if (finalIndex < 0)
-    finalIndex = 0;
+  if (finalIndex < 0) finalIndex = 0;
 
-  return withSize ?
-    photos![finalIndex].media_url.concat('?name=large') :
-    photos![finalIndex].media_url
+  return withSize
+    ? photos![finalIndex].media_url.concat('?name=large')
+    : photos![finalIndex].media_url;
 }
 
-export const getFileFormat = (tweet: Tweet, index: number = 1) => getImageUrl(tweet, false, index).match(/\.[0-9a-z]+$/i)![0]
+export const getFileFormat = (tweet: Tweet, index: number = 1) =>
+  getImageUrl(tweet, false, index).match(/\.[0-9a-z]+$/i)![0];
 
-export const getTweetUrl = (tweet: Tweet) => `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
+export const getTweetUrl = (tweet: Tweet) =>
+  `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`;
 
 export async function downloadImage(uri: string, sketch: SketchOption, file: IFile) {
   try {
-    return await pipelineAsync(
-      got.stream(uri),
-      createWriteStream(getFilePath(sketch, file))
-    )
+    return await pipelineAsync(got.stream(uri), createWriteStream(getFilePath(sketch, file)));
   } catch (error) {
     throw error;
   }
@@ -88,9 +90,9 @@ export function stringifyConfig(config: Configuration, whitelist: string[]): str
 }
 
 export function translatePath(path: string, env?: string): string {
-  const environment = env ?? process.env.NODE_ENV as string;
+  const environment = env ?? (process.env.NODE_ENV as string);
   return environment === 'production' ? path.replace(/\\/g, '/') : path;
-} 
+}
 
 export function deleteFile(sketch: SketchOption, file: IFile): void {
   const assets = join(getAssetsPath(sketch), `${file.name}${file.format}`);
@@ -101,34 +103,35 @@ export function deleteFile(sketch: SketchOption, file: IFile): void {
   });
 }
 
-export const mergeOptions = (defaultOptions: Configuration, customOptions: Configuration) => 
-  ({...defaultOptions, ...customOptions})
+export const mergeOptions = (defaultOptions: Configuration, customOptions: Configuration) => ({
+  ...defaultOptions,
+  ...customOptions,
+});
 
-export const prepareOptions = (customOptions: string): string => 
+export const prepareOptions = (customOptions: string): string =>
   customOptions
     .trim()
     .replace(/\r?\n|\r/g, ' ')
     .split(' ')
     .filter(el => el) // tirar espaços extras
     .map(el => `--${el}`)
-    .join(' ')
-
+    .join(' ');
 
 export function log(logEntry: ILog): void;
-export function log(logEntry: ILog, error: Error): void
-export function log(logEntry: ILog, error: Error, tweet: Tweet): void
+export function log(logEntry: ILog, error: Error): void;
+export function log(logEntry: ILog, error: Error, tweet: Tweet): void;
 
 export function log(logEntry: ILog, error?: Error, tweet?: Tweet): void {
-  logger.log(logEntry)
+  logger.log(logEntry);
 
-  if (error || tweet) { 
-    const json = JSON.stringify({error, tweet}, null, 2)
-    const logId = Date.now()
+  if (error || tweet) {
+    const json = JSON.stringify({ error, tweet }, null, 2);
+    const logId = Date.now();
 
     if (!existsSync('./logs')) {
-      mkdirSync('./logs')
+      mkdirSync('./logs');
     }
-    
-    writeFileSync(`logs/${logId}.json`, json)
+
+    writeFileSync(`logs/${logId}.json`, json);
   }
 }

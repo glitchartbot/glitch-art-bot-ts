@@ -1,17 +1,17 @@
-import { PSketchesEnum } from "./index"
-import { SketchConfig, ISketch } from "../types/sketch"
+import { PSketchesEnum } from './index';
+import { SketchConfig, ISketch } from '../types/sketch';
 
 const globalDefault = {
-  photo: 1
-}
+  photo: 1,
+};
 
 export const sketches: ISketch[] = [
   {
     name: 'pixelsort',
     assets: 'pixelsort\\assets',
-    output: 'pixelsort\\output'
-  }
-]
+    output: 'pixelsort\\output',
+  },
+];
 
 export const sketchesConfig: SketchConfig[] = [
   {
@@ -19,7 +19,7 @@ export const sketchesConfig: SketchConfig[] = [
     parameters: ['mode'],
     defaultConfig: {
       ...globalDefault,
-      mode: 1
-    }
-  }
-] 
+      mode: 1,
+    },
+  },
+];
