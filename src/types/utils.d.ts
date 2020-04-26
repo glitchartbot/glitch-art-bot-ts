@@ -1,22 +1,22 @@
-import { LogEntry } from 'winston'
+import { LogEntry } from 'winston';
 
 export interface IFile {
-  name: string,
-  format: string
+  name: string;
+  format: string;
 }
 
 export interface ILog extends LogEntry {
-  id?: string
+  id?: string;
 }
 
 interface ExtendedError extends Error {
-  id?: string
+  id?: string;
 }
 
 export interface CustomObject {
-  [key: string]: number | string
+  [key: string]: number | string;
 }
 
 export interface Configuration {
-  [key: string]: number
+  [key: string]: number;
 }
