@@ -4,7 +4,7 @@ const { combine, timestamp, printf } = format;
 
 const logFormat = printf(
   ({ level, message, timestamp, id }) =>
-    `${timestamp} [${level.toUpperCase()}] (${id ?? 'Sem ID'}) ${message}`
+    `${timestamp} [${level.toUpperCase()}] (${id ?? 'No ID'}) ${message}`
 );
 
 const options: winston.LoggerOptions = {
