@@ -32,30 +32,30 @@ async function onTweet(tweet: Tweet) {
     });
 
     const parentTweet = await bot.getTweetById(parentId as string);
+
+    if (!utils.hasValidImage(parentTweet)) return;
+
     const tweetText = utils.removeMentions(tweet.full_text ?? (tweet.text as string));
-    const [sketchName, ...customOptions] = tweetText.split(' ');
+    const [sketchName, customOptions] = utils.resolveText(tweetText);
 
     let chosenSketch: SketchConfig;
     let replyText: string;
     let config: Configuration;
     let sanitizedOptions: string;
 
-    if (!utils.hasValidImage(parentTweet)) return;
-
-    if (!utils.isValidSketch(sketchName)) {
-      chosenSketch = getSketchConfig('pixelsort');
-    } else {
+    if (utils.isValidSketch(sketchName)) {
       chosenSketch = getSketchConfig(sketchName as SketchOption);
+    } else {
+      chosenSketch = getSketchConfig('pixelsort');
     }
 
-    if (!utils.isValidConfig(customOptions.join(' '))) {
-      replyText = replies.defaultConfig;
-      config = chosenSketch.defaultConfig;
-    } else {
-      chosenSketch = getSketchConfig(sketchName as SketchOption);
-      sanitizedOptions = utils.prepareOptions(customOptions.join(' '));
+    if (utils.isValidConfig(customOptions)) {
+      sanitizedOptions = utils.prepareOptions(customOptions);
       config = yargsParser(sanitizedOptions);
       replyText = replies.standard;
+    } else {
+      replyText = replies.defaultConfig;
+      config = chosenSketch.defaultConfig;
     }
 
     config = utils.mergeOptions(chosenSketch.defaultConfig, config);
