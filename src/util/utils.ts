@@ -89,6 +89,20 @@ export function stringifyConfig(config: Configuration, whitelist: string[]): str
   return result.trim();
 }
 
+export function resolveText(text: string): string[] {
+  let [first, ...rest] = text.split(' ');
+  let result: string[] = [];
+
+  if (isValidSketch(first)) {
+    result = [first].concat(rest.join(' '));
+  } else if (isValidConfig(first)) {
+    const configText = [first].concat(rest).join(' ');
+    result = [''].concat(configText);
+  }
+
+  return result;
+}
+
 export function translatePath(path: string, env?: string): string {
   const environment = env ?? (process.env.NODE_ENV as string);
   return environment === 'production' ? path.replace(/\\/g, '/') : path;
