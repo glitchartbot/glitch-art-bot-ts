@@ -42,6 +42,7 @@ async function onTweet(tweet: Tweet) {
     let replyText: string;
     let config: Configuration;
     let sanitizedOptions: string;
+    let parsedOptions: Configuration;
 
     if (utils.isValidSketch(sketchName)) {
       chosenSketch = getSketchConfig(sketchName as SketchOption);
@@ -51,14 +52,13 @@ async function onTweet(tweet: Tweet) {
 
     if (utils.isValidConfig(customOptions)) {
       sanitizedOptions = utils.prepareOptions(customOptions);
-      config = yargsParser(sanitizedOptions);
+      parsedOptions = yargsParser(sanitizedOptions);
+      config = utils.mergeOptions(chosenSketch.defaultConfig, parsedOptions);
       replyText = replies.standard;
     } else {
       replyText = replies.defaultConfig;
       config = chosenSketch.defaultConfig;
     }
-
-    config = utils.mergeOptions(chosenSketch.defaultConfig, config);
 
     //Baixa a imagem do tweet
     const imageUrl = utils.getImageUrl(parentTweet, true, config.photo);
