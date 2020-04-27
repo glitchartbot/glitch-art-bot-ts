@@ -250,6 +250,11 @@ test('ordena corretamente as opções se não tem script', () => {
   const withoutMentions4 = removeMentions(input4);
   const output4 = resolveText(withoutMentions4);
 
+  const expected5 = ['', ''];
+  const input5 = '@GlitchArtBot ';
+  const withoutMentions5 = removeMentions(input5);
+  const output5 = resolveText(withoutMentions5);
+
   expect(output1[0]).toBe(expected1[0]);
   expect(output1[1]).toBe(expected1[1]);
 
@@ -261,4 +266,7 @@ test('ordena corretamente as opções se não tem script', () => {
 
   expect(output4[0]).toBe(expected4[0]);
   expect(output4[1]).toBe(expected4[1]);
+
+  expect(output5[0]).toBe(expected5[0]);
+  expect(output5[1]).toBe(expected5[1]);
 });
