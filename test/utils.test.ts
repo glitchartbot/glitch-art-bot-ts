@@ -196,8 +196,22 @@ test('yargs converte corretamente a configuração', () => {
     },
   };
 
+  const third = {
+    input: '--mode=2 --omit',
+    output: {
+      _: [],
+      mode: 2,
+      omit: true,
+    },
+  };
+
   expect(yargsParser(first.input)).toStrictEqual(first.output);
   expect(yargsParser(second.input)).toStrictEqual(second.output);
+  /* 
+    Por algum motivo se eu usar `.toStrictEqual` nesse, ele quebra,
+    então compara depois do `.stringify`
+  */
+  expect(JSON.stringify(yargsParser(third.input))).toEqual(JSON.stringify(third.output));
 });
 
 test('funde as opções com o padrão', () => {
