@@ -98,6 +98,8 @@ export function resolveText(text: string): string[] {
   } else if (isValidConfig(first)) {
     const configText = [first].concat(rest).join(' ');
     result = [''].concat(configText);
+  } else {
+    result = ['', ''];
   }
 
   return result;
