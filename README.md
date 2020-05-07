@@ -10,11 +10,11 @@ O bot usa as credenciais dele, conecta na stream do Twitter e fica "ouvindo" qua
 
 ## Como usar
 
-Tem um repositório só pra isso, olha que incrível! [Clique aqui](https://github.com/friaca/glitch-art-bot-scripts) pra uma explicação detalhada de como usar e personalizar o bot! :)
+Tem um repositório só pra isso, olha que incrível! [Clique aqui](https://github.com/glitchartbot/glitch-art-bot-scripts) pra uma explicação detalhada de como usar e personalizar o bot! :)
 
 ## Scripts disponíveis
 
-**Por mais que a maioria, (senão todos) os scripts não sejam de autoria minha, eles tiveram que ser ajustados pra funcionarem corretamente com o bot. Pra ver os scripts usados pelo bot e como usá-los, [clique aqui](https://github.com/friaca/glitch-art-bot-scripts).*
+**Por mais que a maioria, (senão todos) os scripts não sejam de autoria minha, eles tiveram que ser ajustados pra funcionarem corretamente com o bot. Pra ver os scripts usados pelo bot e como usá-los, [clique aqui](https://github.com/glitchartbot/glitch-art-bot-scripts).*
 
 - Pixel Sort pelo [Kim Asendorf](https://github.com/kimasendorf)
 

@@ -8,11 +8,11 @@ The bot uses its credentials, connects to Twitter's stream and listens to whenev
 
 ## How to use
 
-There's a repository just for that, how amazing! [Click here](https://github.com/friaca/glitch-art-bot-scripts) for a detailed explanation on how to use the bot and customize it! :)
+There's a repository just for that, how amazing! [Click here](https://github.com/glitchartbot/glitch-art-bot-scripts) for a detailed explanation on how to use the bot and customize it! :)
 
 ## Available scripts
 
-**Even though most of (if not all) the scripts are not of my authorship, they had to be adjusted to work properly with the bot. To see the scripts used by the bot and how they work, [click here](https://github.com/friaca/glitch-art-bot-scripts).*
+**Even though most of (if not all) the scripts are not of my authorship, they had to be adjusted to work properly with the bot. To see the scripts used by the bot and how they work, [click here](https://github.com/glitchartbot/glitch-art-bot-scripts).*
 
 - Pixel Sort by [Kim Asendorf](https://github.com/kimasendorf)
 
