@@ -2,7 +2,7 @@ import './util/secrets';
 
 import * as bot from './bot';
 import * as utils from './util/common';
-import replies from './util/replies';
+import replies, { invalidValues } from './util/replies';
 import { promisify } from 'util';
 import { getProcessingCmd, getSketchConfig } from './sketch';
 import { exec } from 'child_process';
@@ -58,6 +58,15 @@ async function onTweet(tweet: Tweet) {
     } else {
       replyText = replies.defaultConfig;
       config = chosenSketch.defaultConfig;
+    }
+
+    const values = utils.isValidValues(config, chosenSketch);
+
+    if (values.status === 'error') {
+      return replyWithError(
+        tweetId,
+        invalidValues(values.type, values.prop, chosenSketch.values[values.prop].boundaries)
+      );
     }
 
     //Baixa a imagem do tweet
