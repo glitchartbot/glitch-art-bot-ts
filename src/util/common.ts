@@ -105,25 +105,47 @@ export function resolveText(text: string): string[] {
   return result;
 }
 
-const isAllowedValue = (allowed: number[], value: number) => allowed.includes(value);
-const isInRange = (range: [number, number], value: number) =>
-  value >= range[0] && value <= range[1];
+const isAllowedValue = (
+  allowed: [number, number] | number[],
+  value: number,
+  type: 'range' | 'allowed'
+) => (type === 'allowed' ? allowed.includes(value) : value >= allowed[0] && value <= allowed[1]);
 
 export function isValidValues(configObj: Configuration, sketchConfig: SketchConfig) {
   const parameters = sketchConfig.parameters;
   const keys = Object.keys(configObj).filter(key => !['photo', '_'].includes(key));
-  let valid = { status: 'success', prop: '', type: '' };
+  let valid: {
+    status: 'success' | 'error';
+    prop: string;
+    type: 'allowed' | 'range';
+  } = {
+    status: 'success',
+    prop: '',
+    type: 'allowed',
+  };
 
   for (const key of keys) {
     if (!parameters.includes(key)) continue;
 
-    if (sketchConfig.values[key].allowed) {
-      if (!isAllowedValue(sketchConfig.values[key].allowed!, configObj[key])) {
+    if (sketchConfig.values[key].type === 'allowed') {
+      if (
+        !isAllowedValue(
+          sketchConfig.values[key].boundaries,
+          configObj[key],
+          sketchConfig.values[key].type
+        )
+      ) {
         valid = { status: 'error', prop: key, type: 'allowed' };
         break;
       }
     } else {
-      if (!isInRange(sketchConfig.values[key].range!, configObj[key])) {
+      if (
+        !isAllowedValue(
+          sketchConfig.values[key].boundaries,
+          configObj[key],
+          sketchConfig.values[key].type
+        )
+      ) {
         valid = { status: 'error', prop: key, type: 'range' };
         break;
       }

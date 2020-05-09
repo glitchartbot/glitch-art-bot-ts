@@ -19,7 +19,8 @@ export const sketchesConfig: SketchConfig[] = [
     parameters: ['mode'],
     values: {
       mode: {
-        allowed: [1, 2, 3],
+        boundaries: [1, 2, 3],
+        type: 'allowed',
       },
     },
     defaultConfig: {

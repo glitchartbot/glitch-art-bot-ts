@@ -279,7 +279,8 @@ test('informa se o valor das opções são válidos', () => {
     parameters: ['mode'],
     values: {
       mode: {
-        allowed: [1, 2, 3],
+        boundaries: [1, 2, 3],
+        type: 'allowed',
       },
     },
     defaultConfig: {
@@ -297,7 +298,7 @@ test('informa se o valor das opções são válidos', () => {
 
   const dummySketchConfigRange: SketchConfig = {
     ...dummySketchConfigAllowed,
-    ...{ values: { mode: { range: [0, 100] } } },
+    ...{ values: { mode: { boundaries: [0, 100], type: 'range' } } },
   };
 
   const invalidDummyRange: Configuration = {
@@ -313,7 +314,7 @@ test('informa se o valor das opções são válidos', () => {
   const validDummyRange = { ...invalidDummyRange, ...{ mode: 50 } };
 
   const error = (prop, type) => ({ status: 'error', prop, type });
-  const success = () => ({ status: 'success', prop: '', type: '' });
+  const success = () => ({ status: 'success', prop: '', type: 'allowed' });
 
   expect(isValidValues(invalidDummyAllowed, dummySketchConfigAllowed)).toStrictEqual(
     error('mode', 'allowed')

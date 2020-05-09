@@ -1,4 +1,8 @@
-export const invalidValues = (type: string, prop: string, allowed: number[] | [number, number]) =>
+export const invalidValues = (
+  type: 'allowed' | 'range',
+  prop: string,
+  allowed: number[] | [number, number]
+) =>
   `Invalid value for '${prop}', this option ${
     type === 'allowed' ? 'accepts' : 'must be between these numbers'
   }: ${allowed.reduce(

@@ -49,7 +49,8 @@ test('retorna a configuração do sketch', () => {
     parameters: ['mode'],
     values: {
       mode: {
-        allowed: [1, 2, 3],
+        boundaries: [1, 2, 3],
+        type: 'allowed',
       },
     },
     defaultConfig: {

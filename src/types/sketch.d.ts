@@ -17,5 +17,8 @@ export type SketchConfig = {
 };
 
 export interface ValueRange {
-  [key: string]: { range?: [number, number]; allowed?: number[] };
+  [key: string]: {
+    boundaries: number[] | [number, number];
+    type: 'range' | 'allowed';
+  };
 }
