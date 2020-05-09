@@ -312,12 +312,16 @@ test('informa se o valor das opções são válidos', () => {
 
   const validDummyRange = { ...invalidDummyRange, ...{ mode: 50 } };
 
-  const error = prop => ({ status: 'error', prop });
-  const success = () => ({ status: 'success', prop: '' });
+  const error = (prop, type) => ({ status: 'error', prop, type });
+  const success = () => ({ status: 'success', prop: '', type: '' });
 
-  expect(isValidValues(invalidDummyAllowed, dummySketchConfigAllowed)).toStrictEqual(error('mode'));
+  expect(isValidValues(invalidDummyAllowed, dummySketchConfigAllowed)).toStrictEqual(
+    error('mode', 'allowed')
+  );
   expect(isValidValues(validDummyAllowed, dummySketchConfigAllowed)).toStrictEqual(success());
-  expect(isValidValues(invalidDummyRange, dummySketchConfigRange)).toStrictEqual(error('mode'));
+  expect(isValidValues(invalidDummyRange, dummySketchConfigRange)).toStrictEqual(
+    error('mode', 'range')
+  );
   expect(isValidValues(validDummyRange, dummySketchConfigRange)).toStrictEqual(success());
   expect(isValidValues(validDummyRange2, dummySketchConfigRange)).toStrictEqual(success());
 });
