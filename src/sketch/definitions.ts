@@ -17,6 +17,11 @@ export const sketchesConfig: SketchConfig[] = [
   {
     name: 'pixelsort' as PSketchesEnum.pixelsort,
     parameters: ['mode'],
+    values: {
+      mode: {
+        allowed: [1, 2, 3],
+      },
+    },
     defaultConfig: {
       ...globalDefault,
       mode: 1,
