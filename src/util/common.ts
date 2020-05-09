@@ -112,19 +112,19 @@ const isInRange = (range: [number, number], value: number) =>
 export function isValidValues(configObj: Configuration, sketchConfig: SketchConfig) {
   const parameters = sketchConfig.parameters;
   const keys = Object.keys(configObj).filter(key => !['photo', '_'].includes(key));
-  let valid = { status: 'success', prop: '' };
+  let valid = { status: 'success', prop: '', type: '' };
 
   for (const key of keys) {
     if (!parameters.includes(key)) continue;
 
     if (sketchConfig.values[key].allowed) {
       if (!isAllowedValue(sketchConfig.values[key].allowed!, configObj[key])) {
-        valid = { status: 'error', prop: key };
+        valid = { status: 'error', prop: key, type: 'allowed' };
         break;
       }
     } else {
       if (!isInRange(sketchConfig.values[key].range!, configObj[key])) {
-        valid = { status: 'error', prop: key };
+        valid = { status: 'error', prop: key, type: 'range' };
         break;
       }
     }
