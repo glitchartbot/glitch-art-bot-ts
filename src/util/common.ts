@@ -8,7 +8,7 @@ import { getAvailableSketchNames, getAssetsPath, getOutputPath } from '../sketch
 import { promisify } from 'util';
 import logger from './logger';
 
-import { SketchOption } from '../types/sketch';
+import { SketchOption, SketchConfig } from '../types/sketch';
 import { Tweet, Media } from '../types/twitter/tweet';
 import { IFile, ILog, CustomObject, Configuration } from '../types/utils';
 
@@ -103,6 +103,34 @@ export function resolveText(text: string): string[] {
   }
 
   return result;
+}
+
+const isAllowedValue = (allowed: number[], value: number) => allowed.includes(value);
+const isInRange = (range: [number, number], value: number) =>
+  value >= range[0] && value <= range[1];
+
+export function isValidValues(configObj: Configuration, sketchConfig: SketchConfig) {
+  const parameters = sketchConfig.parameters;
+  const keys = Object.keys(configObj).filter(key => !['photo', '_'].includes(key));
+  let valid = { status: 'success', prop: '' };
+
+  for (const key of keys) {
+    if (!parameters.includes(key)) continue;
+
+    if (sketchConfig.values[key].allowed) {
+      if (!isAllowedValue(sketchConfig.values[key].allowed!, configObj[key])) {
+        valid = { status: 'error', prop: key };
+        break;
+      }
+    } else {
+      if (!isInRange(sketchConfig.values[key].range!, configObj[key])) {
+        valid = { status: 'error', prop: key };
+        break;
+      }
+    }
+  }
+
+  return valid;
 }
 
 export function translatePath(path: string, env?: string): string {

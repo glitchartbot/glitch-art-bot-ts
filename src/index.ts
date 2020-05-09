@@ -1,7 +1,7 @@
 import './util/secrets';
 
 import * as bot from './bot';
-import * as utils from './util/utils';
+import * as utils from './util/common';
 import replies from './util/replies';
 import { promisify } from 'util';
 import { getProcessingCmd, getSketchConfig } from './sketch';

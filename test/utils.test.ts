@@ -14,16 +14,18 @@ import {
   removeMentions,
   translatePath,
   resolveText,
-} from '../src/util/utils';
+  isValidValues,
+} from '../src/util/common';
 
 import { existsSync, unlinkSync } from 'fs';
 
 import yargsParser from 'yargs-parser';
 
-import { IFile, ILog } from '../src/types/utils';
+import { IFile, ILog, Configuration } from '../src/types/utils';
 
 import * as tweets from './mocks/tweets';
-import { getSketchConfig } from '../src/sketch';
+import { getSketchConfig, PSketchesEnum } from '../src/sketch';
+import { SketchConfig } from '../src/types/sketch';
 
 test('extrai a extensão correta das imagens', () => {
   expect(getFileFormat(tweets.mediaExtended)).toBe('.jpg');
@@ -269,4 +271,53 @@ test('ordena corretamente as opções se não tem script', () => {
 
   expect(output5[0]).toBe(expected5[0]);
   expect(output5[1]).toBe(expected5[1]);
+});
+
+test('informa se o valor das opções são válidos', () => {
+  const dummySketchConfigAllowed: SketchConfig = {
+    name: PSketchesEnum.pixelsort,
+    parameters: ['mode'],
+    values: {
+      mode: {
+        allowed: [1, 2, 3],
+      },
+    },
+    defaultConfig: {
+      photo: 1,
+      mode: 1,
+    },
+  };
+
+  const invalidDummyAllowed: Configuration = {
+    mode: 4,
+    photo: 3,
+  };
+
+  const validDummyAllowed = { ...invalidDummyAllowed, ...{ mode: 1 } };
+
+  const dummySketchConfigRange: SketchConfig = {
+    ...dummySketchConfigAllowed,
+    ...{ values: { mode: { range: [0, 100] } } },
+  };
+
+  const invalidDummyRange: Configuration = {
+    mode: 200,
+    photo: 1,
+  };
+
+  const validDummyRange2: Configuration = {
+    mode: 100,
+    photo: 1,
+  };
+
+  const validDummyRange = { ...invalidDummyRange, ...{ mode: 50 } };
+
+  const error = prop => ({ status: 'error', prop });
+  const success = () => ({ status: 'success', prop: '' });
+
+  expect(isValidValues(invalidDummyAllowed, dummySketchConfigAllowed)).toStrictEqual(error('mode'));
+  expect(isValidValues(validDummyAllowed, dummySketchConfigAllowed)).toStrictEqual(success());
+  expect(isValidValues(invalidDummyRange, dummySketchConfigRange)).toStrictEqual(error('mode'));
+  expect(isValidValues(validDummyRange, dummySketchConfigRange)).toStrictEqual(success());
+  expect(isValidValues(validDummyRange2, dummySketchConfigRange)).toStrictEqual(success());
 });
