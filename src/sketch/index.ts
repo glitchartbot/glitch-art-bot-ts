@@ -3,7 +3,7 @@ import { join } from 'path';
 import { sketches, sketchesConfig } from './definitions';
 import { ISketch, SketchOption, SketchConfig } from '../types/sketch';
 import { CustomObject, Configuration, IFile } from '../types/utils';
-import { stringifyConfig, translatePath } from '../util/utils';
+import { stringifyConfig, translatePath } from '../util/common';
 
 export enum PSketchesEnum {
   pixelsort = 'pixelsort',

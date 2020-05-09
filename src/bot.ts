@@ -2,7 +2,7 @@ const twit = require('twit');
 
 import { readFileSync } from 'fs';
 import { keys } from './config';
-import * as utils from './util/utils';
+import * as utils from './util/common';
 
 import { Get } from './types/twit';
 import { Params } from './types/api';
