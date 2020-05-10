@@ -39,7 +39,7 @@ test('retorna o caminho da pasta de recursos (fontes)', () => {
 });
 
 test('retorna o nome dos sketches disponíveis', () => {
-  const expected = ['pixelsort'];
+  const expected = ['pixelsort', 'pixeldrift'];
   expect(getAvailableSketchNames().sort()).toEqual(expected.sort());
 });
 

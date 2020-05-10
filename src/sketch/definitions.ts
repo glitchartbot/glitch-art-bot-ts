@@ -11,6 +11,11 @@ export const sketches: ISketch[] = [
     assets: 'pixelsort\\assets',
     output: 'pixelsort\\output',
   },
+  {
+    name: 'pixeldrift',
+    assets: 'pixeldrift\\assets',
+    output: 'pixeldrift\\output',
+  },
 ];
 
 export const sketchesConfig: SketchConfig[] = [
@@ -26,6 +31,30 @@ export const sketchesConfig: SketchConfig[] = [
     defaultConfig: {
       ...globalDefault,
       mode: 1,
+    },
+  },
+  {
+    name: 'pixeldrift' as PSketchesEnum.pixeldrift,
+    parameters: ['channel', 'dir', 'amount'],
+    values: {
+      channel: {
+        boundaries: [1, 2, 3],
+        type: 'allowed',
+      },
+      dir: {
+        boundaries: [1, 2],
+        type: 'allowed',
+      },
+      amount: {
+        boundaries: [0, 100],
+        type: 'range',
+      },
+    },
+    defaultConfig: {
+      ...globalDefault,
+      channel: 1,
+      dir: 1,
+      amount: 50,
     },
   },
 ];

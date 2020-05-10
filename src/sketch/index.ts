@@ -7,6 +7,7 @@ import { stringifyConfig, translatePath } from '../util/common';
 
 export enum PSketchesEnum {
   pixelsort = 'pixelsort',
+  pixeldrift = 'pixeldrift',
 }
 
 const path = process.env.P3_PATH;
