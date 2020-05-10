@@ -12,12 +12,7 @@ There's a repository just for that, how amazing! [Click here](https://github.com
 
 ## Available scripts
 
-**Even though most of (if not all) the scripts are not of my authorship, they had to be adjusted to work properly with the bot. To see the scripts used by the bot and how they work, [click here](https://github.com/glitchartbot/glitch-art-bot-scripts).*
+\*_Even though most of (if not all) the scripts are not of my authorship, they had to be adjusted to work properly with the bot. To see the scripts used by the bot and how they work, [click here](https://github.com/glitchartbot/glitch-art-bot-scripts)._
 
 - Pixel Sort by [Kim Asendorf](https://github.com/kimasendorf)
-
-## TODO
-
-- [ ] Add more scripts
-- [x] Add customization to each script, if possible
-- [x] Choose what image to edit, if there's more than one in a tweet 
+- Pixel Drift by [João Friaça](https://github.com/friaca)

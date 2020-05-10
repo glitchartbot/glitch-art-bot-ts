@@ -1,4 +1,4 @@
-***To read this documentation in english, [click here](./README-en-us.md)***
+**_To read this documentation in english, [click here](./README-en-us.md)_**
 
 # glitch-art-bot-ts
 
@@ -14,12 +14,7 @@ Tem um repositório só pra isso, olha que incrível! [Clique aqui](https://gith
 
 ## Scripts disponíveis
 
-**Por mais que a maioria, (senão todos) os scripts não sejam de autoria minha, eles tiveram que ser ajustados pra funcionarem corretamente com o bot. Pra ver os scripts usados pelo bot e como usá-los, [clique aqui](https://github.com/glitchartbot/glitch-art-bot-scripts).*
+\*_Por mais que a maioria, (senão todos) os scripts não sejam de autoria minha, eles tiveram que ser ajustados pra funcionarem corretamente com o bot. Pra ver os scripts usados pelo bot e como usá-los, [clique aqui](https://github.com/glitchartbot/glitch-art-bot-scripts)._
 
-- Pixel Sort pelo [Kim Asendorf](https://github.com/kimasendorf)
-
-## TODO
-
-- [ ] Adicionar mais scripts
-- [x] Adicionar personalização pra cada script, se possível
-- [x] Poder escolher qual imagem editar, se houver mais de uma num tweet
+- Pixel Sort por [Kim Asendorf](https://github.com/kimasendorf)
+- Pixel Drift por [João Friaça](https://github.com/friaca)
