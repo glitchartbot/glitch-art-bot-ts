@@ -54,7 +54,7 @@ export const sketchesConfig: SketchConfig[] = [
       ...globalDefault,
       channel: 1,
       dir: 1,
-      amount: 50,
+      amount: 70,
     },
   },
 ];
