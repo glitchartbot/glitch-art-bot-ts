@@ -11,7 +11,7 @@ export const invalidValues = (
   )}`;
 
 export default {
-  standard: 'Here is your edited image :)',
+  standard: 'Here is your glitched image :)',
   invalidImage: 'No valid image found in the parent tweet',
   defaultConfig:
     'No valid configuration found, using default config.\nFor more information on using custom options, visit https://github.com/glitchartbot/glitch-art-bot-scripts',
