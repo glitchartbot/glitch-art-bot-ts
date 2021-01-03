@@ -23,7 +23,7 @@ async function onTweet(tweet: Tweet) {
     const tweetId = tweet.id_str;
     const parentId = utils.getParentTweetId(tweet);
 
-    if (!parentId) return replyWithError(tweet.id_str, replies.orphanTweet);
+    if (!parentId) return;
 
     utils.log({
       level: 'info',
