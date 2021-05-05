@@ -158,7 +158,7 @@ test('valida se o texto do tweet é válido para configuração', () => {
   expect(invalidResults.length).toBe(0);
 });
 
-test('prepara as opções para serem lidas pelo yargs', () => {
+test('prepara as opções removendo caracteres inúteis', () => {
   const expected = '--mode=2 --photo=2';
 
   const inputs = [
