@@ -9,7 +9,6 @@ import {
   isValidSketch,
   isValidConfig,
   prepareOptions,
-  log,
   mergeOptions,
   removeMentions,
   translatePath,
@@ -19,9 +18,7 @@ import {
 
 import { existsSync, unlinkSync } from 'fs';
 
-import yargsParser from 'yargs-parser';
-
-import { IFile, ILog, Configuration } from '../src/types/utils';
+import { IFile, Configuration } from '../src/types/utils';
 
 import * as tweets from './mocks/tweets';
 import { getSketchConfig, PSketchesEnum } from '../src/sketch';
@@ -178,28 +175,6 @@ test('prepara as opções para serem lidas pelo yargs', () => {
   const allValid = inputs.filter(el => prepareOptions(el) === expected).length === inputs.length;
 
   expect(allValid).toBe(true);
-});
-
-test('yargs converte corretamente a configuração', () => {
-  const first = {
-    input: '--mode=2 --photo=2',
-    output: {
-      _: [],
-      mode: 2,
-      photo: 2,
-    },
-  };
-
-  const second = {
-    input: '--mode=2',
-    output: {
-      _: [],
-      mode: 2,
-    },
-  };
-
-  expect(yargsParser(first.input)).toStrictEqual(first.output);
-  expect(yargsParser(second.input)).toStrictEqual(second.output);
 });
 
 test('funde as opções com o padrão', () => {
