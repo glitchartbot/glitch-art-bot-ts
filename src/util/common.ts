@@ -1,6 +1,4 @@
-// got não exporta ou não tem definições
-const got = require('got');
-
+import got from 'got';
 import { createWriteStream, writeFileSync, unlink, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import { pipeline } from 'stream';
@@ -9,8 +7,8 @@ import { promisify } from 'util';
 import logger from './logger';
 
 import { SketchOption, SketchConfig } from '../types/sketch';
-import { Tweet, Media } from '../types/twitter/tweet';
-import { IFile, ILog, CustomObject, Configuration } from '../types/utils';
+import { Tweet } from '../types/twitter/tweet';
+import { IFile, ILog, Configuration } from '../types/utils';
 
 const pipelineAsync = promisify(pipeline);
 
