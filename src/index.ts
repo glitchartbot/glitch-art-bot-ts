@@ -6,7 +6,6 @@ import replies, { invalidValues } from './util/replies';
 import { promisify } from 'util';
 import { getProcessingCmd, getSketchConfig } from './sketch';
 import { exec } from 'child_process';
-import yargsParser from 'yargs-parser';
 
 import { ILog, Configuration, IFile } from './types/utils';
 import { Tweet } from './types/twitter/tweet';
@@ -52,7 +51,7 @@ async function onTweet(tweet: Tweet) {
 
     if (utils.isValidConfig(customOptions)) {
       sanitizedOptions = utils.prepareOptions(customOptions);
-      parsedOptions = yargsParser(sanitizedOptions);
+      parsedOptions = utils.parseConfig(sanitizedOptions);
       config = utils.mergeOptions(chosenSketch.defaultConfig, parsedOptions);
       replyText = replies.standard;
     } else {
