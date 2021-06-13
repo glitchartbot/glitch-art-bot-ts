@@ -105,9 +105,9 @@ test('retorna a url da imagem', () => {
 });
 
 test('baixa as imagens', async () => {
-  const infoImagem: IFile = {
+  const infoImagem: File = {
     name: 'placeholder',
-    format: '.png',
+    extension: '.png',
   };
 
   await downloadImage('https://via.placeholder.com/1280', 'pixelsort', infoImagem);
