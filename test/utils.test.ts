@@ -18,7 +18,7 @@ import {
 
 import { existsSync, unlinkSync } from 'fs';
 
-import { IFile, Configuration } from '../src/types/utils';
+import { File, Configuration } from '../src/types/utils';
 
 import * as tweets from './mocks/tweets';
 import { getSketchConfig, PSketchesEnum } from '../src/sketch';
@@ -42,9 +42,9 @@ test('retorna o "tweet pai"', () => {
 });
 
 test('retorna o caminho do arquivo desejado', () => {
-  const imagem1: IFile = {
+  const imagem1: File = {
     name: 'imagem',
-    format: '.jpg',
+    extension: '.jpg',
   };
 
   //TODO: Corrigir caminho de teste

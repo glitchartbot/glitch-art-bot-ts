@@ -1,22 +1,22 @@
 import { PSketchesEnum } from '../../src/sketch/index';
 import { Configuration } from './utils';
 
-export interface ISketch {
-  name: string;
+export interface Sketch {
+  name: SketchName;
   assets: string;
   output: string;
 }
 
-export type SketchOption = keyof typeof PSketchesEnum;
+export type SketchName = keyof typeof PSketchesEnum;
 
 export type SketchConfig = {
-  name: PSketchesEnum;
+  name: SketchName;
   parameters: string[];
-  values: ValueRange;
+  values: ParameterValues;
   defaultConfig: Configuration;
 };
 
-export interface ValueRange {
+export interface ParameterValues {
   [key: string]: {
     boundaries: number[] | [number, number];
     type: 'range' | 'allowed';

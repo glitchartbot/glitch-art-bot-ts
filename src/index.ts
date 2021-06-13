@@ -7,9 +7,9 @@ import { promisify } from 'util';
 import { getProcessingCmd, getSketchConfig } from './sketch';
 import { exec } from 'child_process';
 
-import { ILog, Configuration, IFile } from './types/utils';
+import { Log, Configuration, File } from './types/utils';
 import { Tweet } from './types/twitter/tweet';
-import { SketchConfig, SketchOption } from './types/sketch';
+import { SketchConfig, SketchName } from './types/sketch';
 
 const execAsync = promisify(exec);
 
@@ -44,7 +44,7 @@ async function onTweet(tweet: Tweet) {
     let parsedOptions: Configuration;
 
     if (utils.isValidSketch(sketchName)) {
-      chosenSketch = getSketchConfig(sketchName as SketchOption);
+      chosenSketch = getSketchConfig(sketchName as SketchName);
     } else {
       chosenSketch = getSketchConfig('pixelsort');
     }
@@ -71,7 +71,7 @@ async function onTweet(tweet: Tweet) {
     //Baixa a imagem do tweet
     const imageUrl = utils.getImageUrl(parentTweet, true, config.photo);
     const format = utils.getFileFormat(parentTweet, config.photo);
-    const file: IFile = { name: tweetId, format };
+    const file: File = { name: tweetId, extension: format };
     await utils.downloadImage(imageUrl, chosenSketch.name, file);
 
     //Executa o comando que edita a imagem
@@ -111,7 +111,7 @@ async function onTweet(tweet: Tweet) {
       });
     }
   } catch (error) {
-    const log: ILog = {
+    const log: Log = {
       level: 'error',
       message: error.message,
       ...baseLog,

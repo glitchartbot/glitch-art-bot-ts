@@ -4,12 +4,12 @@ import { readFileSync } from 'fs';
 import { keys } from './config';
 import * as utils from './util/common';
 
-import { Get } from './types/twit';
+import { Response } from './types/twit';
 import { Params } from './types/api';
 import { Tweet } from './types/twitter/tweet';
 import { UploadedMedia } from './types/twitter/media';
-import { SketchOption } from './types/sketch';
-import { ExtendedError, IFile } from './types/utils';
+import { SketchName } from './types/sketch';
+import { ExtendedError, File } from './types/utils';
 
 const twitter = new twit(keys);
 export const ID = '1232403291151196160';
@@ -17,20 +17,20 @@ export const ID = '1232403291151196160';
 function uploadTweet(params: Params): Promise<Tweet> {
   return twitter
     .post('statuses/update', params)
-    .then((res: Get<Tweet>) => res.data)
+    .then((res: Response<Tweet>) => res.data)
     .catch((error: Error) => {
       throw error;
     });
 }
 
-function uploadImage(sketch: SketchOption, file: IFile): Promise<UploadedMedia> {
+function uploadImage(sketch: SketchName, file: File): Promise<UploadedMedia> {
   const filePath = utils.getOuputPath(sketch, file);
   const b64 = readFileSync(filePath, { encoding: 'base64' });
   const params: Params = { media_data: b64 };
 
   return twitter
     .post('media/upload', params)
-    .then((res: Get<UploadedMedia>) => res.data)
+    .then((res: Response<UploadedMedia>) => res.data)
     .catch((error: ExtendedError) => {
       throw error;
     });
@@ -41,7 +41,7 @@ export function getTweetById(tweetId: string): Promise<Tweet> {
 
   return twitter
     .get('statuses/show', params)
-    .then((res: Get<Tweet>) => res.data)
+    .then((res: Response<Tweet>) => res.data)
     .catch((error: ExtendedError) => {
       error.id = tweetId;
       throw error;
@@ -58,15 +58,15 @@ export function replyTweet(tweetId: string, status: string): Promise<Tweet>;
 export function replyTweet(
   tweetId: string,
   status?: string,
-  sketch?: SketchOption,
-  file?: IFile
+  sketch?: SketchName,
+  file?: File
 ): Promise<Tweet>;
 
 export async function replyTweet(
   tweetId: string,
   status?: string,
-  sketch?: SketchOption,
-  file?: IFile
+  sketch?: SketchName,
+  file?: File
 ): Promise<Tweet> {
   try {
     const tweet = await getTweetById(tweetId);

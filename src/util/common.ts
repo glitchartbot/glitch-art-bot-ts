@@ -6,9 +6,9 @@ import { getAvailableSketchNames, getAssetsPath, getOutputPath } from '../sketch
 import { promisify } from 'util';
 import logger from './logger';
 
-import { SketchOption, SketchConfig } from '../types/sketch';
+import { SketchName, SketchConfig } from '../types/sketch';
 import { Tweet } from '../types/twitter/tweet';
-import { IFile, ILog, Configuration } from '../types/utils';
+import { File, Log, Configuration } from '../types/utils';
 
 const pipelineAsync = promisify(pipeline);
 
@@ -25,11 +25,11 @@ export const isValidSketch = (sketchName: string): boolean =>
 export const isValidConfig = (text: string): boolean =>
   Boolean(text.trim().match(/^(\w+=\d+( |)+){1,}$/gm));
 
-export const getFilePath = (sketch: SketchOption, file: IFile) =>
-  join(getAssetsPath(sketch), `${file.name}${file.format}`);
+export const getFilePath = (sketch: SketchName, file: File) =>
+  join(getAssetsPath(sketch), `${file.name}${file.extension}`);
 
-export const getOuputPath = (sketch: SketchOption, file: IFile) =>
-  join(getOutputPath(sketch), `${file.name}${file.format}`);
+export const getOuputPath = (sketch: SketchName, file: File) =>
+  join(getOutputPath(sketch), `${file.name}${file.extension}`);
 
 export const removeMentions = (text: string): string =>
   text
@@ -67,7 +67,7 @@ export const getFileFormat = (tweet: Tweet, index: number = 1) =>
 export const getTweetUrl = (tweet: Tweet) =>
   `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`;
 
-export async function downloadImage(uri: string, sketch: SketchOption, file: IFile) {
+export async function downloadImage(uri: string, sketch: SketchName, file: File) {
   try {
     return await pipelineAsync(got.stream(uri), createWriteStream(getFilePath(sketch, file)));
   } catch (error) {
@@ -167,9 +167,9 @@ export function translatePath(path: string, env?: string): string {
   return environment === 'production' ? path.replace(/\\/g, '/') : path;
 }
 
-export function deleteFile(sketch: SketchOption, file: IFile): void {
-  const assets = join(getAssetsPath(sketch), `${file.name}${file.format}`);
-  const output = join(getOutputPath(sketch), `${file.name}${file.format}`);
+export function deleteFile(sketch: SketchName, file: File): void {
+  const assets = join(getAssetsPath(sketch), `${file.name}${file.extension}`);
+  const output = join(getOutputPath(sketch), `${file.name}${file.extension}`);
 
   unlink(assets, () => {
     unlink(output, () => {});
@@ -190,11 +190,11 @@ export const prepareOptions = (customOptions: string): string =>
     .map(el => `--${el}`)
     .join(' ');
 
-export function log(logEntry: ILog): void;
-export function log(logEntry: ILog, error: Error): void;
-export function log(logEntry: ILog, error: Error, tweet: Tweet): void;
+export function log(logEntry: Log): void;
+export function log(logEntry: Log, error: Error): void;
+export function log(logEntry: Log, error: Error, tweet: Tweet): void;
 
-export function log(logEntry: ILog, error?: Error, tweet?: Tweet): void {
+export function log(logEntry: Log, error?: Error, tweet?: Tweet): void {
   logger.log(logEntry);
 
   if (error || tweet) {

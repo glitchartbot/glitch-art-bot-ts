@@ -1,11 +1,10 @@
-import { PSketchesEnum } from './index';
-import { SketchConfig, ISketch } from '../types/sketch';
+import { SketchConfig, Sketch } from '../types/sketch';
 
 const globalDefault = {
   photo: 1,
 };
 
-export const sketches: ISketch[] = [
+export const sketches: Sketch[] = [
   {
     name: 'pixelsort',
     assets: 'pixelsort\\assets',
@@ -20,7 +19,7 @@ export const sketches: ISketch[] = [
 
 export const sketchesConfig: SketchConfig[] = [
   {
-    name: 'pixelsort' as PSketchesEnum.pixelsort,
+    name: 'pixelsort',
     parameters: ['mode'],
     values: {
       mode: {
@@ -34,7 +33,7 @@ export const sketchesConfig: SketchConfig[] = [
     },
   },
   {
-    name: 'pixeldrift' as PSketchesEnum.pixeldrift,
+    name: 'pixeldrift',
     parameters: ['channel', 'dir', 'amount'],
     values: {
       channel: {

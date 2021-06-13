@@ -1,20 +1,16 @@
 import { LogEntry } from 'winston';
 
-export interface IFile {
+export interface File {
   name: string;
-  format: string;
+  extension: string;
 }
 
-export interface ILog extends LogEntry {
+export interface Log extends LogEntry {
   id?: string;
 }
 
 interface ExtendedError extends Error {
   id?: string;
-}
-
-export interface CustomObject {
-  [key: string]: number | string;
 }
 
 export interface Configuration {
