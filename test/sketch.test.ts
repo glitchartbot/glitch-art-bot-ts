@@ -18,7 +18,7 @@ test('retorna o comando certo pra executar o script', () => {
 });
 
 test('retorna o caminho da pasta de recursos (fontes)', () => {
-  const regex = /(\\|\/)assets$/gm;
+  const regex = /pixelsort(\\|\/)assets$/gm;
   const pathAssets = getAssetsPath('pixelsort');
   const matches = pathAssets.match(regex);
 
