@@ -187,7 +187,7 @@ export const prepareOptions = (customOptions: string): string =>
     .trim()
     .replace(/\r?\n|\r/g, ' ')
     .split(' ')
-    .filter(el => el) // tirar espaços extras
+    .filter(Boolean)
     .map(el => `--${el}`)
     .join(' ');
 
