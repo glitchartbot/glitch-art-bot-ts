@@ -1,7 +1,7 @@
 import { join } from 'path';
 
-import { sketches, sketchesConfig } from './definitions';
-import { Sketch, SketchName, SketchConfig } from '../types/sketch';
+import { sketchesConfig } from './definitions';
+import { SketchName, SketchConfig } from '../types/sketch';
 import { Configuration, File } from '../types/utils';
 import { stringifyConfig, translatePath } from '../util/common';
 
@@ -13,23 +13,17 @@ export enum PSketchesEnum {
 const path = process.env.P3_PATH;
 const sketchBase = process.env.P3_SKETCH_BASE as string;
 
-export const getSketch = (sketchName: SketchName): Sketch =>
-  sketches.find(sketch => sketch.name === sketchName) as Sketch;
+export const getSketch = (sketchName: SketchName): SketchConfig =>
+  sketchesConfig.find(sketch => sketch.name === sketchName) as SketchConfig;
 
-export const getAvailableSketchNames = (): string[] => sketches.map(sketch => sketch.name);
+export const getAvailableSketchNames = (): string[] => sketchesConfig.map(sketch => sketch.name);
 
 export const getSketchConfig = (sketchName: SketchName): SketchConfig =>
   sketchesConfig.find(sketch => sketch.name === sketchName) as SketchConfig;
 
-export const getAssetsPath = (sketchName: SketchName) => {
-  const sketch = getSketch(sketchName);
-  return join(sketchBase, translatePath(sketch.assets));
-};
+export const getAssetsPath = (sketchName: SketchName) => join(sketchBase, sketchName, 'assets');
 
-export const getOutputPath = (sketchName: SketchName) => {
-  const sketch = getSketch(sketchName);
-  return join(sketchBase, translatePath(sketch.output));
-};
+export const getOutputPath = (sketchName: SketchName) => join(sketchBase, sketchName, 'output');
 
 export function getProcessingCmd(sketchName: SketchName): string;
 export function getProcessingCmd(sketchName: SketchName, configuration: Configuration): string;
