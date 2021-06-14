@@ -16,3 +16,9 @@ interface ExtendedError extends Error {
 export interface Configuration {
   [key: string]: number;
 }
+
+export interface ValueValidation {
+  status: 'success' | 'error';
+  prop: string;
+  type: 'allowed' | 'range';
+}

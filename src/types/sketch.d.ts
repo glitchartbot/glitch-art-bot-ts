@@ -8,6 +8,8 @@ export interface Sketch {
 }
 
 export type SketchName = keyof typeof PSketchesEnum;
+export type ValueType = 'range' | 'allowed';
+export type ValueBoundary = number[] | [number, number];
 
 export type SketchConfig = {
   name: SketchName;
@@ -18,7 +20,7 @@ export type SketchConfig = {
 
 export interface ParameterValues {
   [key: string]: {
-    boundaries: number[] | [number, number];
-    type: 'range' | 'allowed';
+    boundaries: ValueBoundary;
+    type: ValueType;
   };
 }

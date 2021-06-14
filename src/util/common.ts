@@ -6,9 +6,9 @@ import { getAvailableSketchNames, getAssetsPath, getOutputPath } from '../sketch
 import { promisify } from 'util';
 import logger from './logger';
 
-import { SketchName, SketchConfig } from '../types/sketch';
+import { SketchName, SketchConfig, ValueBoundary, ValueType } from '../types/sketch';
 import { Tweet } from '../types/twitter/tweet';
-import { File, Log, Configuration } from '../types/utils';
+import { File, Log, Configuration, ValueValidation } from '../types/utils';
 
 const { writeFile } = promises;
 const pipelineAsync = promisify(pipeline);
@@ -113,20 +113,15 @@ export const parseConfig = (configText: string) =>
     .map(each => each.split('='))
     .reduce<Configuration>((acc, [key, value]) => ({...acc, ...{[key]: Number(value)}}), {})
 
-const isAllowedValue = (
-  allowed: [number, number] | number[],
-  value: number,
-  type: 'range' | 'allowed'
-) => (type === 'allowed' ? allowed.includes(value) : value >= allowed[0] && value <= allowed[1]);
+const isAllowedValue = (allowed: ValueBoundary, value: number, type: ValueType) => 
+  type === 'allowed' ? 
+    allowed.includes(value) : 
+    value >= allowed[0] && value <= allowed[1];
 
 export function isValidValues(configObj: Configuration, sketchConfig: SketchConfig) {
-  const parameters = sketchConfig.parameters;
+  const { parameters } = sketchConfig;
   const keys = Object.keys(configObj).filter(key => !['photo', '_'].includes(key));
-  let valid: {
-    status: 'success' | 'error';
-    prop: string;
-    type: 'allowed' | 'range';
-  } = {
+  let valid: ValueValidation = {
     status: 'success',
     prop: '',
     type: 'allowed',
