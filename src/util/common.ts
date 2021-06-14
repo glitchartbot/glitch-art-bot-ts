@@ -178,7 +178,6 @@ export const prepareOptions = (customOptions: string): string =>
     .replace(/\r?\n|\r/g, ' ')
     .split(' ')
     .filter(Boolean)
-    .map(el => `--${el}`)
     .join(' ');
 
 export function log(logEntry: Log): void;

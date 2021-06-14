@@ -12,7 +12,7 @@ import {
   mergeOptions,
   removeMentions,
   resolveText,
-  isValidValues,
+  isValidValues
 } from '../src/util/common';
 
 import { existsSync, unlinkSync } from 'fs';
@@ -158,7 +158,7 @@ test('valida se o texto do tweet é válido para configuração', () => {
 });
 
 test('prepara as opções removendo caracteres inúteis', () => {
-  const expected = '--mode=2 --photo=2';
+  const expected = 'mode=2 photo=2';
 
   const inputs = [
     'mode=2 photo=2',
