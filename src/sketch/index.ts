@@ -11,7 +11,7 @@ export enum PSketchesEnum {
 }
 
 const path = process.env.P3_PATH;
-const sketchBase = process.env.P3_SKETCH_BASE;
+const sketchBase = process.env.P3_SKETCH_BASE as string;
 
 export const getSketch = (sketchName: SketchName): Sketch =>
   sketches.find(sketch => sketch.name === sketchName) as Sketch;
@@ -23,12 +23,12 @@ export const getSketchConfig = (sketchName: SketchName): SketchConfig =>
 
 export const getAssetsPath = (sketchName: SketchName) => {
   const sketch = getSketch(sketchName);
-  return join(sketchBase as string, translatePath(sketch.assets));
+  return join(sketchBase, translatePath(sketch.assets));
 };
 
 export const getOutputPath = (sketchName: SketchName) => {
   const sketch = getSketch(sketchName);
-  return join(sketchBase as string, translatePath(sketch.output));
+  return join(sketchBase, translatePath(sketch.output));
 };
 
 export function getProcessingCmd(sketchName: SketchName): string;
@@ -46,7 +46,7 @@ export function getProcessingCmd(
 ): string {
   const sketch = getSketch(sketchName);
   const sketchConfig = getSketchConfig(sketchName);
-  const purePath = `${path} --sketch=${join(sketchBase as string, sketch.name)} --run`;
+  const purePath = `${path} --sketch=${join(sketchBase, sketch.name)} --run`;
   const args = configuration ? stringifyConfig(configuration, sketchConfig.parameters) : '';
   const fileInfo = file ? `filename=${file.name} format=${file.extension}` : '';
 
