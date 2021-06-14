@@ -65,7 +65,7 @@ async function onTweet(tweet: Tweet) {
     const values = utils.isValidValues(config, chosenSketch);
 
     if (values.status === 'error') {
-      return replyWithError(
+      return bot.replyTweet(
         tweetId,
         invalidValues(values.type, values.prop, chosenSketch.values[values.prop].boundaries)
       );
@@ -123,10 +123,6 @@ async function onTweet(tweet: Tweet) {
     utils.log(log, error);
     throw error;
   }
-}
-
-function replyWithError(tweetId: string, reason: string) {
-  bot.replyTweet(tweetId, reason);
 }
 
 async function main() {
