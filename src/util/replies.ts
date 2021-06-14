@@ -1,14 +1,9 @@
-export const invalidValues = (
-  type: 'allowed' | 'range',
-  prop: string,
-  allowed: number[] | [number, number]
-) =>
+import { ValueType, ValueBoundary } from '../types/sketch'
+
+export const invalidValues = (type: ValueType, prop: string, allowed: ValueBoundary) =>
   `Invalid value for '${prop}', this option ${
     type === 'allowed' ? 'accepts' : 'must be between these numbers'
-  }: ${allowed.reduce(
-    (acc, curr, index, self) => (acc += index + 1 === self.length ? `${curr}` : `${curr}, `),
-    ''
-  )}`;
+  }: ${allowed.join(', ')}`;
 
 export default {
   standard: 'Here is your glitched image :)',
