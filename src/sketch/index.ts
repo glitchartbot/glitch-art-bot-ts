@@ -13,9 +13,6 @@ export enum PSketchesEnum {
 const path = process.env.P3_PATH;
 const sketchBase = process.env.P3_SKETCH_BASE as string;
 
-export const getSketch = (sketchName: SketchName): SketchConfig =>
-  sketchesConfig.find(sketch => sketch.name === sketchName) as SketchConfig;
-
 export const getAvailableSketchNames = (): string[] => sketchesConfig.map(sketch => sketch.name);
 
 export const getSketchConfig = (sketchName: SketchName): SketchConfig =>

@@ -1,5 +1,4 @@
 import {
-  getSketch,
   getProcessingCmd,
   getAssetsPath,
   getAvailableSketchNames,
