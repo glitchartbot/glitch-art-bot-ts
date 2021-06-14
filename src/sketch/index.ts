@@ -22,7 +22,7 @@ export const getAssetsPath = (sketchName: SketchName) => join(sketchBase, sketch
 
 export const getOutputPath = (sketchName: SketchName) => join(sketchBase, sketchName, 'output');
 
-export function getProcessingCmd(sketchName: SketchName, configuration: Configuration, file: File): string {
+export function getProcessingCmd(sketchName: SketchName, configuration?: Configuration, file?: File): string {
   const sketchConfig = getSketchConfig(sketchName);
   const purePath = `${path} --sketch=${join(sketchBase, sketchConfig.name)} --run`;
   const args = configuration ? stringifyConfig(configuration, sketchConfig.parameters) : '';

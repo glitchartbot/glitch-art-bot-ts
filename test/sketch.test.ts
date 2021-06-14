@@ -1,3 +1,4 @@
+import path from 'path';
 import {
   getProcessingCmd,
   getAssetsPath,
@@ -11,10 +12,13 @@ test('retorna o comando certo pra executar o script', () => {
   const cmdPure = getProcessingCmd('pixelsort');
   const cmdWithArgs = getProcessingCmd('pixelsort', { mode: 1, photo: 2 });
   const matches = [cmdPure.match(regexPurePath), cmdWithArgs.match(regexPathWithArgs)];
-
   const allMatches = matches.filter(el => el).length === matches.length;
+  
+  const literalCmd = `${process.env.P3_PATH} --sketch=${path.join(process.env.P3_SKETCH_BASE, 'pixelsort')} --run mode=1 filename=abc format=.png`
+  const cmdToMatchLiteral = getProcessingCmd('pixelsort', { mode: 1, photo: 2 }, { name: 'abc', extension: '.png'});
 
   expect(allMatches).toBe(true);
+  expect(cmdToMatchLiteral).toBe(literalCmd);
 });
 
 test('retorna o caminho da pasta de recursos (fontes)', () => {
