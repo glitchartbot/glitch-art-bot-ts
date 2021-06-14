@@ -38,9 +38,8 @@ export function getProcessingCmd(
   configuration?: Configuration,
   file?: File
 ): string {
-  const sketch = getSketch(sketchName);
   const sketchConfig = getSketchConfig(sketchName);
-  const purePath = `${path} --sketch=${join(sketchBase, sketch.name)} --run`;
+  const purePath = `${path} --sketch=${join(sketchBase, sketchConfig.name)} --run`;
   const args = configuration ? stringifyConfig(configuration, sketchConfig.parameters) : '';
   const fileInfo = file ? `filename=${file.name} format=${file.extension}` : '';
 
