@@ -40,22 +40,11 @@ export const removeMentions = (text: string): string =>
     .join(' ')
     .trim();
 
-export function getImageUrl(tweet: Tweet, withSize: boolean): string;
-export function getImageUrl(tweet: Tweet, withSize: boolean, index: number): string;
+export function getImageUrl(tweet: Tweet, withSize: boolean, index: number = 1): string {
+  const clamp = (n: number, min: number, max: number) => Math.min(Math.max(n, min), max);
 
-export function getImageUrl(tweet: Tweet, withSize: boolean, index?: number): string {
   const photos = tweet.extended_entities!.media!.filter(media => media.type === 'photo');
-  let finalIndex = 0;
-
-  if (index) {
-    if (index - 1 > photos!.length) {
-      finalIndex = photos!.length - 1;
-    } else {
-      finalIndex = index - 1;
-    }
-  }
-
-  if (finalIndex < 0) finalIndex = 0;
+  const finalIndex = clamp(index, 1, photos.length) - 1;
 
   return withSize
     ? photos![finalIndex].media_url.concat('?name=large')
