@@ -79,7 +79,7 @@ async function onTweet(tweet: Tweet) {
 
     //Executa o comando que edita a imagem
     const cmd = getProcessingCmd(chosenSketch.name, config, file);
-    const { stdout, stderr } = await execAsync(cmd);
+    const { stderr } = await execAsync(cmd);
 
     if (stderr) {
       utils.log({
