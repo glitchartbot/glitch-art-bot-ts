@@ -43,8 +43,6 @@ async function onTweet(tweet: Tweet) {
     let chosenSketch: SketchConfig;
     let replyText: string;
     let config: Configuration;
-    let sanitizedOptions: string;
-    let parsedOptions: Configuration;
 
     if (utils.isValidSketch(sketchName)) {
       chosenSketch = getSketchConfig(sketchName as SketchName);
@@ -53,9 +51,7 @@ async function onTweet(tweet: Tweet) {
     }
 
     if (utils.isValidConfig(customOptions)) {
-      sanitizedOptions = utils.prepareOptions(customOptions);
-      parsedOptions = utils.parseConfig(sanitizedOptions);
-      config = utils.mergeOptions(chosenSketch.defaultConfig, parsedOptions);
+      config = utils.mergeOptions(chosenSketch.defaultConfig, utils.parseConfig(utils.prepareOptions(customOptions)));
       replyText = replies.standard;
     } else {
       replyText = replies.defaultConfig;
@@ -73,8 +69,8 @@ async function onTweet(tweet: Tweet) {
 
     //Baixa a imagem do tweet
     const imageUrl = utils.getImageUrl(parentTweet, true, config.photo);
-    const format = utils.getFileFormat(parentTweet, config.photo);
-    const file: File = { name: tweetId, extension: format };
+    const extension = utils.getFileExtension(parentTweet, config.photo);
+    const file: File = { name: tweetId, extension };
     await utils.downloadImage(imageUrl, chosenSketch.name, file);
 
     //Executa o comando que edita a imagem

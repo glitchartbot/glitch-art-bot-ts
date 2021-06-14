@@ -62,7 +62,7 @@ export function getImageUrl(tweet: Tweet, withSize: boolean, index?: number): st
     : photos![finalIndex].media_url;
 }
 
-export const getFileFormat = (tweet: Tweet, index: number = 1) =>
+export const getFileExtension = (tweet: Tweet, index: number = 1) =>
   getImageUrl(tweet, false, index).match(/\.[0-9a-z]+$/i)![0];
 
 export const getTweetUrl = (tweet: Tweet) =>

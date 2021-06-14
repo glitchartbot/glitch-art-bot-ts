@@ -1,5 +1,5 @@
 import {
-  getFileFormat,
+  getFileExtension,
   hasValidImage,
   getParentTweetId,
   getFilePath,
@@ -24,8 +24,8 @@ import { getSketchConfig, PSketchesEnum } from '../src/sketch';
 import { SketchConfig } from '../src/types/sketch';
 
 test('extrai a extensão correta das imagens', () => {
-  expect(getFileFormat(tweets.mediaExtended)).toBe('.jpg');
-  expect(getFileFormat(tweets.mediaNotExtended)).toBe('.png');
+  expect(getFileExtension(tweets.mediaExtended)).toBe('.jpg');
+  expect(getFileExtension(tweets.mediaNotExtended)).toBe('.png');
 });
 
 test('retorna a existência de imagem válida no tweet', () => {
