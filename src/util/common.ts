@@ -158,11 +158,6 @@ export function isValidValues(configObj: Configuration, sketchConfig: SketchConf
   return valid;
 }
 
-export function translatePath(path: string, env?: string): string {
-  const environment = env ?? (process.env.NODE_ENV as string);
-  return environment === 'production' ? path.replace(/\\/g, '/') : path;
-}
-
 export function deleteFile(sketch: SketchName, file: File): void {
   const assets = join(getAssetsPath(sketch), `${file.name}${file.extension}`);
   const output = join(getOutputPath(sketch), `${file.name}${file.extension}`);

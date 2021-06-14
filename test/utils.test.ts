@@ -11,7 +11,6 @@ import {
   prepareOptions,
   mergeOptions,
   removeMentions,
-  translatePath,
   resolveText,
   isValidValues,
 } from '../src/util/common';
@@ -193,17 +192,6 @@ test('remove as menções desnecessárias do texto', () => {
   const input = '@AllAboutMariah @MariahCarey @WORLDMUSICAWARD @GlitchArtBot photo=2';
 
   expect(removeMentions(input)).toBe(expected);
-});
-
-test('traduz os caminhos em cada ambiente', () => {
-  const NODE_ENV_DEV = 'development';
-  const NODE_ENV_PROD = 'production';
-
-  const path_dev = 'sketch\\output';
-  const path_prod = 'sketch/output';
-
-  expect(translatePath(path_dev, NODE_ENV_DEV)).toBe(path_dev);
-  expect(translatePath(path_dev, NODE_ENV_PROD)).toBe(path_prod);
 });
 
 test('ordena corretamente as opções se não tem script', () => {
