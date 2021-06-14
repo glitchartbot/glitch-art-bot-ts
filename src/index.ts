@@ -3,14 +3,17 @@ import './util/secrets';
 import * as bot from './bot';
 import * as utils from './util/common';
 import replies, { invalidValues } from './util/replies';
-import { promisify } from 'util';
 import { getProcessingCmd, getSketchConfig } from './sketch';
+
 import { exec } from 'child_process';
+import { promisify } from 'util';
+import { promises } from 'fs';
 
 import { Log, Configuration, File } from './types/utils';
 import { Tweet } from './types/twitter/tweet';
 import { SketchConfig, SketchName } from './types/sketch';
 
+const { access, mkdir } = promises;
 const execAsync = promisify(exec);
 
 async function onTweet(tweet: Tweet) {
@@ -126,6 +129,17 @@ function replyWithError(tweetId: string, reason: string) {
   bot.replyTweet(tweetId, reason);
 }
 
-console.log('Starting bot...');
-console.log('The bot started');
-bot.listenQuery('@GlitchArtBot', onTweet);
+async function main() {
+    console.log('Starting Glitch Art Bot...');
+
+    try {
+      await access('./logs');
+    } catch (error) {
+      mkdir('./logs', { recursive: true });
+    }
+
+    bot.listenQuery('@GlitchArtBot', onTweet);
+    console.log('The bot started succesfully!');
+}
+
+main();

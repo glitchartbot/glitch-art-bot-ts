@@ -1,5 +1,5 @@
 import got from 'got';
-import { createWriteStream, writeFileSync, unlink, existsSync, mkdirSync } from 'fs';
+import { createWriteStream, unlink, promises } from 'fs';
 import { join } from 'path';
 import { pipeline } from 'stream';
 import { getAvailableSketchNames, getAssetsPath, getOutputPath } from '../sketch';
@@ -10,6 +10,7 @@ import { SketchName, SketchConfig } from '../types/sketch';
 import { Tweet } from '../types/twitter/tweet';
 import { File, Log, Configuration } from '../types/utils';
 
+const { writeFile } = promises;
 const pipelineAsync = promisify(pipeline);
 
 export const getParentTweetId = (tweet: Tweet) => tweet.in_reply_to_status_id_str;
@@ -201,10 +202,6 @@ export function log(logEntry: Log, error?: Error, tweet?: Tweet): void {
     const json = JSON.stringify({ error, tweet }, null, 2);
     const logId = Date.now();
 
-    if (!existsSync('./logs')) {
-      mkdirSync('./logs');
-    }
-
-    writeFileSync(`logs/${logId}.json`, json);
+    writeFile(`logs/${logId}.json`, json);
   }
 }
