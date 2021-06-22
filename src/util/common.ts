@@ -65,17 +65,11 @@ export async function downloadImage(uri: string, sketch: SketchName, file: File)
   }
 }
 
-export function stringifyConfig(config: Configuration, whitelist: string[]): string {
-  let result = '';
-
-  for (const [key, value] of Object.entries(config)) {
-    if (whitelist.includes(key)) {
-      result += `${key}=${value} `;
-    }
-  }
-
-  return result.trim();
-}
+export const stringifyConfig = (config: Configuration, whitelist: string[]) =>
+  Object.entries(config)
+    .filter(([key]) => whitelist.includes(key))
+    .map(([key, value]) => `${key}=${value}`)
+    .join(' ')
 
 export function resolveText(text: string): string[] {
   let [first, ...rest] = text.split(' ');
