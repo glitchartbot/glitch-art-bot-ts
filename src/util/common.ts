@@ -34,11 +34,9 @@ export const getOuputPath = (sketch: SketchName, file: File) =>
 
 export const removeMentions = (text: string): string =>
   text
-    .trim()
     .split(' ')
-    .filter(el => !el.startsWith('@'))
-    .join(' ')
-    .trim();
+    .filter(el => !el.startsWith('@') && Boolean(el))
+    .join(' ');
 
 export function getImageUrl(tweet: Tweet, withSize: boolean, index: number = 1): string {
   const clamp = (n: number, min: number, max: number) => Math.min(Math.max(n, min), max);
