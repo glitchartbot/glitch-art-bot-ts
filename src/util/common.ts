@@ -82,10 +82,7 @@ export function resolveText(text: string): string[] {
 
 export const parseConfig = (configText: string) => 
   configText
-    .trim()
-    .replace(/\r?\n|\r/g, ' ')
     .split(' ')
-    .filter(el => el) // tirar espaços extras
     .map(each => each.split('='))
     .reduce<Configuration>((acc, [key, value]) => ({...acc, ...{[key]: Number(value)}}), {})
 
