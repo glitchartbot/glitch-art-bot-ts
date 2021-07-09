@@ -72,19 +72,12 @@ export const stringifyConfig = (config: Configuration, whitelist: string[]) =>
     .join(' ')
 
 export function resolveText(text: string): string[] {
-  let [first, ...rest] = text.split(' ');
-  let result: string[] = [];
+  const [first, ...rest] = text.split(' ');
 
-  if (isValidSketch(first)) {
-    result = [first].concat(rest.join(' '));
-  } else if (isValidConfig(first)) {
-    const configText = [first].concat(rest).join(' ');
-    result = [''].concat(configText);
-  } else {
-    result = ['', ''];
-  }
-
-  return result;
+  // como eu queria que tivesse pattern matching no javascript...
+  if (isValidSketch(first)) return [first, rest.join(' ')];
+  else if (isValidConfig(first)) return ['', text];
+  else return ['', ''];
 }
 
 export const parseConfig = (configText: string) => 
