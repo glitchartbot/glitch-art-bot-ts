@@ -28,5 +28,5 @@ export function getProcessingCmd(sketchName: SketchName, configuration?: Configu
   const args = configuration ? stringifyConfig(configuration, sketchConfig.parameters) : '';
   const fileInfo = file ? `filename=${file.name} format=${file.extension}` : '';
 
-  return [purePath, args, fileInfo].join(' ').trim();
+  return [purePath, args, fileInfo].join(' ');
 }
