@@ -7,11 +7,11 @@ test('parseia as opções informadas pelo usuário', () => {
       output: { mode: 5, photo: 1 }
     },
     {
-      input: ' photo=2',
+      input: 'photo=2',
       output: { photo: 2 }
     },
     {
-      input: '    a=3 b=5',
+      input: 'a=3 b=5',
       output: { a: 3, b: 5 }
     }
   ];
