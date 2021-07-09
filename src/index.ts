@@ -109,6 +109,8 @@ async function onTweet(tweet: Tweet) {
         ...baseLog,
       });
     }
+    
+    return;
   } catch (error) {
     const log: Log = {
       level: 'error',
