@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "got": "^10.6.0",
+    "got": "^11.8.5",
     "twit": "^2.2.11",
     "winston": "^3.2.1"
   },
